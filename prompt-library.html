@@ -1,0 +1,495 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, html { font-family: 'Figtree', sans-serif; }
+  .lib { font-family: 'Figtree', sans-serif; padding: 0; }
+  .header { background: #191919; padding: 20px 24px 16px; border-radius: 10px 10px 0 0; display: flex; align-items: center; gap: 14px; }
+  .header img { height: 28px; }
+  .header-title { color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; }
+  .toolbar { background: #F4F5F6; padding: 14px 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; border-bottom: 1px solid #e0e0e0; }
+  .search-wrap { flex: 1; min-width: 180px; position: relative; }
+  .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: 0.4; }
+  .search { width: 100%; padding: 8px 10px 8px 34px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Figtree', sans-serif; font-size: 13px; background: #fff; outline: none; }
+  .search:focus { border-color: #E52217; }
+  .pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: 1.5px solid transparent; background: #fff; color: #595959; transition: all 0.15s; }
+  .pill:hover { border-color: #E52217; color: #E52217; }
+  .pill.active { background: #E52217; color: #fff; border-color: #E52217; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0; border-left: 1px solid #e8e8e8; border-top: 1px solid #e8e8e8; }
+  .card { background: #fff; border-right: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer; transition: background 0.12s; }
+  .card:hover { background: #FFF8F7; }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .tag { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+  .tag-seo { background: #E6F1FB; color: #185FA5; }
+  .tag-analytics { background: #EAF3DE; color: #3B6D11; }
+  .tag-strategy { background: #FAEEDA; color: #854F0B; }
+  .tag-automation { background: #EEEDFE; color: #3C3489; }
+  .tag-content { background: #FBEAF0; color: #72243E; }
+  .tag-client { background: #E1F5EE; color: #085041; }
+  .card-title { font-size: 14px; font-weight: 600; color: #191919; line-height: 1.4; }
+  .card-desc { font-size: 12px; color: #595959; line-height: 1.6; flex: 1; }
+  .card-vars { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 2px; }
+  .var-badge { font-size: 10px; background: #F4F5F6; color: #595959; padding: 2px 7px; border-radius: 4px; font-family: monospace; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+  .copy-btn { font-size: 11px; font-weight: 600; color: #E52217; background: none; border: 1px solid #E52217; border-radius: 5px; padding: 4px 10px; cursor: pointer; font-family: 'Figtree', sans-serif; transition: all 0.15s; }
+  .copy-btn:hover { background: #E52217; color: #fff; }
+  .copy-btn.copied { background: #118541; border-color: #118541; color: #fff; }
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 100; align-items: center; justify-content: center; }
+  .modal-bg.open { display: flex; }
+  .modal { background: #fff; border-radius: 10px; width: min(640px, 92vw); max-height: 80vh; overflow-y: auto; box-shadow: 0 8px 40px rgba(0,0,0,0.18); }
+  .modal-head { padding: 20px 24px 16px; border-bottom: 1px solid #eee; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; position: sticky; top: 0; background: #fff; z-index: 1; }
+  .modal-title { font-size: 16px; font-weight: 700; color: #191919; }
+  .modal-close { background: none; border: none; font-size: 20px; color: #999; cursor: pointer; line-height: 1; padding: 0 4px; }
+  .modal-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px; }
+  .modal-section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #E52217; margin-bottom: 6px; }
+  .prompt-box { background: #F4F5F6; border-radius: 8px; padding: 14px 16px; font-size: 12.5px; color: #191919; line-height: 1.75; white-space: pre-wrap; font-family: monospace; border-left: 3px solid #E52217; }
+  .example-box { background: #FFF8F7; border-radius: 8px; padding: 12px 16px; font-size: 12.5px; color: #595959; line-height: 1.7; white-space: pre-wrap; }
+  .tip-box { background: #F4F5F6; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #595959; line-height: 1.6; }
+  .modal-cta { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-primary { background: #E52217; color: #fff; border: none; border-radius: 6px; padding: 9px 18px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Figtree', sans-serif; }
+  .btn-secondary { background: #fff; color: #191919; border: 1.5px solid #ddd; border-radius: 6px; padding: 9px 18px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: 'Figtree', sans-serif; }
+  .empty { text-align: center; padding: 48px 24px; color: #999; font-size: 14px; grid-column: 1 / -1; }
+  .count-bar { padding: 10px 20px; background: #F4F5F6; font-size: 11px; color: #888; border-bottom: 1px solid #e8e8e8; }
+</style>
+
+<div class="lib">
+  <div class="header">
+    <img src="https://mocainteractive.com/assets/svg/logo-light.svg" alt="Moca">
+    <span class="header-title">Prompt Library — Framework AI di Agenzia</span>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search" id="searchInput" placeholder="Cerca prompt, variabile, categoria..." oninput="filterCards()">
+    </div>
+    <div class="pills" id="pills"></div>
+  </div>
+  <div class="count-bar" id="countBar"></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal">
+    <div class="modal-head">
+      <div>
+        <div id="modalTag" style="margin-bottom:8px"></div>
+        <div class="modal-title" id="modalTitle"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const data = [
+  {
+    id: 1,
+    cat: "SEO",
+    tag: "seo",
+    title: "System prompt schede prodotto",
+    desc: "Genera descrizioni prodotto ottimizzate SEO con tono di brand coerente e variazioni strutturali.",
+    vars: ["{{brand}}", "{{categoria}}", "{{tono}}"],
+    prompt: `Sei un copywriter SEO esperto per {{brand}}, un brand nel settore {{categoria}}.
+
+Il tuo compito è scrivere descrizioni prodotto che:
+- Siano ottimizzate per la keyword principale [KEYWORD] e secondarie
+- Rispettino il tono: {{tono}} (es. premium, casual, tecnico)
+- Abbiano una struttura: 2 paragrafi narrativi + lista caratteristiche in HTML <ul>
+- Non inventino mai composizioni o materiali non forniti
+- Varino strutturalmente tra una scheda e l'altra
+
+Output richiesto:
+1. TITOLO (max 60 caratteri)
+2. META TITLE SEO (max 60 caratteri)
+3. META DESCRIPTION (max 155 caratteri)
+4. DESCRIZIONE COMPLETA (HTML)`,
+    example: `Brand: Ulysses Boutique | Categoria: abbigliamento uomo premium | Tono: raffinato ma diretto`,
+    tip: "Aggiungi sempre una sezione REGOLE FISSE con i no del brand (es. 'non usare aggettivi vuoti come lussuoso'). Testa sempre su 3 prodotti campione prima di scalare."
+  },
+  {
+    id: 2,
+    cat: "SEO",
+    tag: "seo",
+    title: "Analisi gap keyword con i competitor",
+    desc: "Identifica keyword in cui i competitor si posizionano e tu no, con prioritizzazione per opportunità.",
+    vars: ["{{dominio_cliente}}", "{{competitor_1}}", "{{competitor_2}}"],
+    prompt: `Analizza le opportunità di keyword gap tra {{dominio_cliente}} e i competitor {{competitor_1}}, {{competitor_2}}.
+
+Per ogni keyword identificata fornisci:
+- Volume di ricerca mensile stimato
+- Difficoltà (bassa / media / alta)
+- Intent (informazionale / commerciale / transazionale)
+- Pagina competitor che si posiziona
+- Priorità d'azione (quick win / medio termine / lungo termine)
+
+Raggruppa i risultati in cluster tematici.
+Concludi con una raccomandazione sui 5 contenuti da creare subito.`,
+    example: `Cliente: valerio1966.com | Competitor: etro.com, zegna.com`,
+    tip: "Usa questo prompt dopo aver esportato i dati da SEMRush o Ahrefs. Incollali come CSV nel contesto per risultati più precisi."
+  },
+  {
+    id: 3,
+    cat: "ANALYTICS",
+    tag: "analytics",
+    title: "Report anomalia traffico GA4",
+    desc: "Diagnosi rapida di cali o picchi improvvisi di traffico organico, con ipotesi e next step.",
+    vars: ["{{periodo}}", "{{canale}}", "{{variazione_%}}"],
+    prompt: `Ho rilevato una variazione di {{variazione_%}} nel traffico {{canale}} nel periodo {{periodo}}.
+
+Analizza le possibili cause in ordine di probabilità:
+1. Cause tecniche (crawlabilità, indicizzazione, Core Web Vitals)
+2. Cause algoritmiche (aggiornamenti Google nello stesso periodo)
+3. Cause di contenuto (pagine modificate, rimosse, canonicalizzate)
+4. Cause esterne (stagionalità, eventi di settore, competitor)
+
+Per ogni ipotesi indica:
+- Come verificarla (strumento + metrica specifica)
+- Tempo stimato per la diagnosi
+- Impatto potenziale se confermata
+
+Concludi con una checklist diagnostica prioritizzata.`,
+    example: `Variazione: -42% | Canale: organic | Periodo: marzo 2026 vs febbraio 2026`,
+    tip: "Alimenta il prompt con dati reali da Search Console e GA4 — screenshot o dati CSV nel contesto migliorano molto la qualità della diagnosi."
+  },
+  {
+    id: 4,
+    cat: "ANALYTICS",
+    tag: "analytics",
+    title: "Interpretazione report mensile organico",
+    desc: "Struttura un'analisi narrativa dei dati SEO mensili con insight e raccomandazioni per il cliente.",
+    vars: ["{{brand_cliente}}", "{{mese}}", "{{kpi_principali}}"],
+    prompt: `Stai preparando il report organico mensile per {{brand_cliente}} relativo a {{mese}}.
+
+I dati disponibili sono: {{kpi_principali}}
+
+Struttura l'analisi in questo ordine:
+1. EXECUTIVE SUMMARY (3 righe, per chi non legge tutto)
+2. TREND PRINCIPALI — cosa è successo e perché
+3. PAGINE IN CRESCITA — con ipotesi sul motivo
+4. PAGINE IN CALO — con ipotesi e piano d'azione
+5. KEYWORD OPPORTUNITIES — nuove posizioni in top 20 da spingere
+6. RACCOMANDAZIONI — massimo 3 azioni concrete per il mese successivo
+
+Tono: professionale ma accessibile. Evita il gergo tecnico non spiegato.`,
+    example: `Cliente: Valerio 1966 | Mese: febbraio 2026 | KPI: sessioni organiche, clic GSC, posizione media, conversioni`,
+    tip: "Per il cliente Valerio 1966 aggiungi sempre il contesto sulla sezione donna rimossa: è la variabile di controllo per interpretare i dati correttamente."
+  },
+  {
+    id: 5,
+    cat: "STRATEGY",
+    tag: "strategy",
+    title: "Framework 90 giorni nuovo cliente",
+    desc: "Piano operativo strutturato per i primi 90 giorni di onboarding su un nuovo cliente.",
+    vars: ["{{brand_cliente}}", "{{settore}}", "{{obiettivo_principale}}"],
+    prompt: `Crea un piano operativo per i primi 90 giorni con {{brand_cliente}}, nel settore {{settore}}.
+L'obiettivo principale dichiarato è: {{obiettivo_principale}}
+
+Struttura il piano in 3 fasi:
+
+FASE 1 — AUDIT & FONDAMENTA (giorni 1-30)
+- Audit tecnico SEO
+- Audit GA4/GTM
+- Mappatura del funnel attuale
+- Identificazione quick win
+
+FASE 2 — ATTIVAZIONE (giorni 31-60)
+- Implementazione correzioni tecniche
+- Prime azioni contenuto/link
+- Setup tracking avanzato
+- Primo report di stato
+
+FASE 3 — OTTIMIZZAZIONE (giorni 61-90)
+- A/B test e CRO
+- Scaling delle azioni che funzionano
+- Presentazione roadmap 6 mesi
+
+Per ogni fase: deliverable, responsabile (cliente/agenzia), KPI di verifica.`,
+    example: `Cliente: Ronca Style | Settore: fashion retail Magento | Obiettivo: aumentare LTV e ridurre dipendenza da paid`,
+    tip: "Non iniziare mai 'facendo campagne'. Il valore dei primi 90 giorni è nella costruzione di fondamenta solide, non nell'esecuzione frenetica."
+  },
+  {
+    id: 6,
+    cat: "STRATEGY",
+    tag: "strategy",
+    title: "Proposta commerciale pitching",
+    desc: "Struttura narrativa per una proposta commerciale che posiziona MOCA come architetti di crescita, non come esecutori.",
+    vars: ["{{brand_prospect}}", "{{problema_dichiarato}}", "{{budget_indicativo}}"],
+    prompt: `Prepara la struttura narrativa di una proposta commerciale per {{brand_prospect}}.
+
+Il problema dichiarato dal prospect è: {{problema_dichiarato}}
+Budget indicativo: {{budget_indicativo}}
+
+La proposta deve seguire questa struttura:
+1. SITUAZIONE ATTUALE — specchio del problema (fai sentire il prospect capito)
+2. PERCHÉ ORA — urgenza contestuale (trend di mercato, competitor, stagionalità)
+3. LA NOSTRA VISIONE — non esecutori ma architetti di crescita
+4. I 4 PILASTRI — ADV, CRO, SEO, Analytics come sistema integrato
+5. I PRIMI 90 GIORNI — piano concreto, non promesse vaghe
+6. INVESTIMENTO — ROI atteso, non solo costo
+7. PERCHÉ MOCA — prove, non autocelebrazione
+
+Tono: diretto, concreto, con numeri e casi reali dove possibile.`,
+    example: `Prospect: azienda fashion Verona | Problema: "le vendite online non crescono nonostante gli investimenti ADV" | Budget: 3-5k/mese`,
+    tip: "Il differenziale non è 'facciamo SEO e ADV', è il fatto che integriamo tutto in un sistema dove ogni euro investito è leggibile. Parti sempre da questo."
+  },
+  {
+    id: 7,
+    cat: "AUTOMATION",
+    tag: "automation",
+    title: "System prompt per generatore mockup HTML",
+    desc: "System prompt per Claude che genera mockup HTML di pagine prodotto/landing seguendo il template definito.",
+    vars: ["{{tipo_pagina}}", "{{brand}}", "{{template_ref}}"],
+    prompt: `Sei un esperto di UX e HTML per {{brand}}. Il tuo compito è generare mockup HTML completi per pagine di tipo {{tipo_pagina}}.
+
+Segui SEMPRE il template di riferimento: {{template_ref}}
+
+REGOLE OBBLIGATORIE:
+- Output solo HTML valido, nessun testo fuori dai tag
+- Usa solo classi CSS già definite nel template
+- Non inventare componenti non presenti nel template
+- Le sezioni obbligatorie devono sempre esserci: [HERO, VANTAGGI, CTA, FAQ]
+- Le sezioni opzionali vanno incluse solo se i dati sono forniti
+
+VARIABILI DA SOSTITUIRE sono indicate con [[VARIABILE]]:
+- [[TITOLO_PAGINA]], [[DESCRIZIONE]], [[CTA_TEXT]], [[IMMAGINE_HERO]]
+
+Quando mancano dati, usa placeholder espliciti come [[INSERIRE TESTO]] mai inventare contenuti.`,
+    example: `Tipo pagina: mutuo prima casa | Brand: Euroansa/TassoMutuo | Template: template_pagine_mutuo_v3.md`,
+    tip: "Questo è il cuore del progetto Euroansa. Verifica sempre che il system prompt referenzi l'ultima versione del template (attualmente v3)."
+  },
+  {
+    id: 8,
+    cat: "AUTOMATION",
+    tag: "automation",
+    title: "Classificatore di intent keyword",
+    desc: "Classifica in batch liste di keyword per search intent e assegnale al funnel corretto.",
+    vars: ["{{settore}}", "{{brand}}", "{{lista_keyword}}"],
+    prompt: `Classifica le seguenti keyword per {{brand}} nel settore {{settore}}.
+
+Keyword da analizzare:
+{{lista_keyword}}
+
+Per ogni keyword fornisci:
+- INTENT: Informazionale | Navigazionale | Commerciale | Transazionale
+- FUNNEL: TOFU | MOFU | BOFU
+- PAGINA SUGGERITA: (tipo di pagina da creare/ottimizzare)
+- PRIORITÀ: Alta | Media | Bassa
+- NOTE: eventuali osservazioni
+
+Output in formato tabella CSV con separatore |`,
+    example: `Brand: cliente ecommerce fashion | Keyword: "come abbinare blazer uomo", "blazer uomo blu navy", "comprare blazer uomo online"`,
+    tip: "Per risultati migliori, aggiungi nel contesto i dati di volume e CPC da Google Ads Keyword Planner o SEMRush."
+  },
+  {
+    id: 9,
+    cat: "CONTENT",
+    tag: "content",
+    title: "Brief contenuto SEO per copywriter",
+    desc: "Genera un brief editoriale completo per un copywriter esterno, pronto da consegnare.",
+    vars: ["{{keyword_target}}", "{{url_pagina}}", "{{competitor_top3}}"],
+    prompt: `Crea un brief SEO completo per un copywriter su:
+Keyword target: {{keyword_target}}
+URL di destinazione: {{url_pagina}}
+Competitor top 3 SERP: {{competitor_top3}}
+
+Il brief deve includere:
+1. KEYWORD ANALYSIS — principale, secondarie, semantiche correlate
+2. SEARCH INTENT — cosa cerca realmente l'utente
+3. STRUTTURA CONSIGLIATA — H1, H2, H3 con topic suggeriti
+4. LUNGHEZZA STIMATA — parole raccomandate
+5. ELEMENTI OBBLIGATORI — FAQ, tabelle, immagini, dati
+6. TONO E STILE — con 3 esempi di incipit
+7. COSA NON FARE — basato sull'analisi dei competitor
+8. KPI DI VERIFICA — come misurare il successo della pagina`,
+    example: `Keyword: "mutuo prima casa under 36" | URL: /mutuo-prima-casa-under-36/ | Competitor: idealista.it, mutuisupermarket.it, chebanca.it`,
+    tip: "Più dati SERP reali passi nel contesto, più precisi saranno i suggerimenti strutturali. Usa l'estrazione GSC + analisi manuale dei top 5 risultati."
+  },
+  {
+    id: 10,
+    cat: "CONTENT",
+    tag: "content",
+    title: "Variazioni intro schede prodotto",
+    desc: "Genera N variazioni strutturalmente diverse di apertura per schede prodotto, per evitare uniformità.",
+    vars: ["{{prodotto}}", "{{n_variazioni}}", "{{tono}}"],
+    prompt: `Genera {{n_variazioni}} variazioni di incipit per la scheda prodotto di: {{prodotto}}
+Tono richiesto: {{tono}}
+
+Ogni variazione deve:
+- Avere una STRUTTURA DIVERSA (non solo cambiare le parole)
+- Partire da un angolo narrativo differente:
+  A) Occasione d'uso
+  B) Materiale/qualità
+  C) Feeling/emozione
+  D) Stile/abbinamento
+  E) Heritage/storia del prodotto
+
+- Essere max 2 righe (35-50 parole)
+- Non contenere aggettivi vuoti: lussuoso, esclusivo, unico, raffinato
+- Non iniziare mai con "Scopri" o "Benvenuto"
+
+Numera le variazioni e indica la categoria (A-E) usata.`,
+    example: `Prodotto: blazer in lana vergine navy double-breasted | N: 8 | Tono: diretto e maschile`,
+    tip: "Usato per Primadonna Collection e Ulysses Boutique. Aggiungi sempre la regola 'VARIAZIONE OBBLIGATORIA' al system prompt per garantire diversità strutturale reale."
+  },
+  {
+    id: 11,
+    cat: "CLIENT",
+    tag: "client",
+    title: "Email di aggiornamento stato lavori",
+    desc: "Draft email di status update al cliente, chiara e rassicurante, senza tecnicismi non spiegati.",
+    vars: ["{{nome_cliente}}", "{{progetto}}", "{{stato_attuale}}"],
+    prompt: `Scrivi un'email di aggiornamento lavori per {{nome_cliente}} relativa al progetto {{progetto}}.
+
+Stato attuale: {{stato_attuale}}
+
+L'email deve:
+- Aprire con il risultato più positivo o avanzamento concreto
+- Elencare cosa è stato fatto (max 4 punti, senza gergo tecnico)
+- Indicare chiaramente i prossimi step con date se possibile
+- Chiudere con un'azione richiesta al cliente (se c'è) o con rassicurazione
+- Tono: professionale ma caldo, non formale
+
+MAX 200 parole. Oggetto email incluso.`,
+    example: `Cliente: Euroansa | Progetto: implementazione mockup pagine mutuo | Stato: template v3 approvato, in produzione le prime 5 pagine`,
+    tip: "Per clienti che tendono ad ansiare, anticipa sempre le possibili domande nel corpo dell'email. Un aggiornamento proattivo vale più di tre email reattive."
+  },
+  {
+    id: 12,
+    cat: "CLIENT",
+    tag: "client",
+    title: "Debriefing post-meeting",
+    desc: "Struttura le note di un meeting in formato condivisibile con decisioni, azioni e responsabili.",
+    vars: ["{{data_meeting}}", "{{partecipanti}}", "{{argomenti_trattati}}"],
+    prompt: `Struttura le note del meeting del {{data_meeting}} con {{partecipanti}}.
+
+Argomenti trattati: {{argomenti_trattati}}
+
+Formato output:
+
+RIEPILOGO MEETING — {{data_meeting}}
+Partecipanti: [lista]
+
+DECISIONI PRESE:
+- [decisione 1]
+- [decisione 2]
+
+AZIONI CONCORDATE:
+| Azione | Responsabile | Deadline |
+|--------|--------------|----------|
+
+PUNTI APERTI (da risolvere nel prossimo meeting):
+- [punto aperto]
+
+PROSSIMO MEETING: [data se definita]
+
+Tono neutro, fatti non opinioni.`,
+    example: `Data: 20/03/2026 | Partecipanti: MOCA + Luigi + cliente Ronca | Argomenti: strategia ecommerce 2026, budget ADV, timeline sito`,
+    tip: "Invia sempre il debriefing entro 24h dal meeting. Chi lo riceve lo usa come promemoria, chi non c'era lo usa come aggiornamento."
+  }
+];
+
+const catColors = { seo: 'tag-seo', analytics: 'tag-analytics', strategy: 'tag-strategy', automation: 'tag-automation', content: 'tag-content', client: 'tag-client' };
+const catLabels = { seo: 'SEO', analytics: 'Analytics', strategy: 'Strategy', automation: 'Automation', content: 'Content', client: 'Client Mgmt' };
+
+let activeFilter = 'all';
+let currentItem = null;
+
+function renderPills() {
+  const cats = ['all', ...new Set(data.map(d => d.tag))];
+  const container = document.getElementById('pills');
+  container.innerHTML = cats.map(c => {
+    const label = c === 'all' ? 'Tutti' : catLabels[c] || c;
+    return `<span class="pill ${c === activeFilter ? 'active' : ''}" onclick="setFilter('${c}')">${label}</span>`;
+  }).join('');
+}
+
+function setFilter(cat) {
+  activeFilter = cat;
+  renderPills();
+  filterCards();
+}
+
+function filterCards() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = data.filter(d => {
+    const matchCat = activeFilter === 'all' || d.tag === activeFilter;
+    const matchQ = !q || d.title.toLowerCase().includes(q) || d.desc.toLowerCase().includes(q) || d.vars.join(' ').toLowerCase().includes(q) || d.cat.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  renderGrid(filtered);
+}
+
+function renderGrid(items) {
+  const grid = document.getElementById('grid');
+  const bar = document.getElementById('countBar');
+  bar.textContent = `${items.length} prompt disponibili`;
+  if (!items.length) {
+    grid.innerHTML = '<div class="empty">Nessun prompt trovato. Prova con un altro termine.</div>';
+    return;
+  }
+  grid.innerHTML = items.map(d => `
+    <div class="card" onclick="openModal(${d.id})">
+      <div class="card-top">
+        <span class="card-title">${d.title}</span>
+        <span class="tag ${catColors[d.tag]}">${catLabels[d.tag]}</span>
+      </div>
+      <div class="card-desc">${d.desc}</div>
+      <div class="card-vars">${d.vars.map(v => `<span class="var-badge">${v}</span>`).join('')}</div>
+      <div class="card-footer">
+        <span style="font-size:11px;color:#aaa;">Clicca per espandere</span>
+        <button class="copy-btn" onclick="event.stopPropagation();copyPrompt(${d.id},this)">Copia prompt</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openModal(id) {
+  const d = data.find(x => x.id === id);
+  currentItem = d;
+  document.getElementById('modalTag').innerHTML = `<span class="tag ${catColors[d.tag]}">${catLabels[d.tag]}</span>`;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalBody').innerHTML = `
+    <div>
+      <div class="modal-section-label">Prompt</div>
+      <div class="prompt-box">${d.prompt}</div>
+    </div>
+    <div>
+      <div class="modal-section-label">Variabili</div>
+      <div class="card-vars" style="gap:6px">${d.vars.map(v => `<span class="var-badge" style="font-size:12px;padding:3px 9px">${v}</span>`).join('')}</div>
+    </div>
+    ${d.example ? `<div>
+      <div class="modal-section-label">Esempio di input</div>
+      <div class="example-box">${d.example}</div>
+    </div>` : ''}
+    ${d.tip ? `<div>
+      <div class="modal-section-label">Tip operativo</div>
+      <div class="tip-box">💡 ${d.tip}</div>
+    </div>` : ''}
+    <div class="modal-cta">
+      <button class="btn-primary" onclick="copyPrompt(${d.id}, this)">Copia prompt</button>
+      <button class="btn-secondary" onclick="closeModal()">Chiudi</button>
+    </div>
+  `;
+  document.getElementById('modalBg').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('open');
+}
+
+function copyPrompt(id, btn) {
+  const d = data.find(x => x.id === id);
+  navigator.clipboard.writeText(d.prompt).then(() => {
+    const prev = btn.textContent;
+    btn.textContent = 'Copiato!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = prev; btn.classList.remove('copied'); }, 1800);
+  });
+}
+
+renderPills();
+filterCards();
+</script>
