@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisi Recensioni App — Vittoria Assicurazioni · MOCA Interactive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#E52217;--red-light:#FF5147;--red-pale:#FFE7E6;
+  --dark:#191919;--mid:#595959;--light:#F4F5F6;--white:#FFFFFF;
+  --green:#118541;--green-pale:#E8F5E9;
+  --blue:#5781FF;--blue-pale:#EEF2FF;
+  --orange:#DB5E29;--orange-pale:#FEF0E8;
+  --yellow:#F5A623;--yellow-pale:#FEF9EC;
+  --purple:#551FC4;
+  --font:'Figtree',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--light);color:var(--dark);min-height:100vh;}
+
+/* ── LAYOUT ── */
+.page{max-width:1100px;margin:0 auto;padding:0 0 80px;}
+
+/* ── HEADER ── */
+.header{background:var(--dark);padding:28px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.header-logo img{height:26px;filter:brightness(0) invert(1);}
+.header-meta{text-align:right;}
+.header-meta .label{font-size:10px;color:#666;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.header-meta .value{font-size:12px;color:#aaa;margin-top:2px;}
+
+/* ── HERO ── */
+.hero{background:var(--red);padding:44px 48px 48px;margin-bottom:40px;}
+.hero-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:12px;}
+.hero-title{font-size:32px;font-weight:700;color:#fff;text-transform:uppercase;line-height:1.1;margin-bottom:8px;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:28px;}
+.hero-nav{display:flex;gap:8px;flex-wrap:wrap;}
+.hero-nav-btn{padding:8px 20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-radius:6px;border:1.5px solid rgba(255,255,255,.4);color:rgba(255,255,255,.85);background:transparent;cursor:pointer;font-family:var(--font);transition:all .18s;text-decoration:none;}
+.hero-nav-btn:hover,.hero-nav-btn.active{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.8);color:#fff;}
+
+/* ── SECTIONS ── */
+.section{padding:0 48px;margin-bottom:40px;}
+.section-anchor{display:block;height:0;margin-top:-80px;padding-top:80px;} /* offset for sticky header */
+.section-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-label::after{content:'';flex:1;height:1px;background:#ddd;}
+
+/* ── NOTE ── */
+.note{background:#FFFBFB;border:1px solid #f0d0d0;border-left:3px solid var(--red);border-radius:8px;padding:14px 18px;margin-bottom:24px;}
+.note-text{font-size:12px;color:var(--mid);line-height:1.65;}
+
+/* ── KPI GRID ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.kpi-card{background:var(--white);border-radius:10px;padding:20px 22px;border:1px solid #eaeaea;}
+.kpi-label{font-size:10px;color:var(--mid);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.kpi-value{font-size:30px;font-weight:700;color:var(--dark);line-height:1;}
+.kpi-value.red{color:var(--red);}
+.kpi-value.green{color:var(--green);}
+.kpi-value.blue{color:var(--blue);}
+.kpi-sub{font-size:12px;color:var(--mid);margin-top:7px;}
+.kpi-sub strong{font-weight:600;color:var(--dark);}
+
+/* ── TWO COL ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.card{background:var(--white);border-radius:10px;border:1px solid #eaeaea;padding:24px;}
+.card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--dark);margin-bottom:18px;}
+
+/* ── STARS ── */
+.star-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.star-label{font-size:13px;font-weight:600;color:var(--dark);width:24px;text-align:right;}
+.star-count{font-size:12px;color:var(--mid);width:38px;}
+.bar-wrap{flex:1;background:#f0f0f0;border-radius:4px;height:10px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;transition:width 1s ease;}
+.bar-5{background:var(--green);}
+.bar-4{background:#4CAF50;}
+.bar-3{background:#FFC107;}
+.bar-2{background:#FF7043;}
+.bar-1{background:var(--red);}
+.star-pct{font-size:12px;color:var(--mid);width:38px;text-align:right;}
+
+/* ── STORE ── */
+.store-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f0f0f0;}
+.store-row:last-of-type{border-bottom:none;}
+.store-name{font-size:13px;font-weight:600;color:var(--dark);}
+.store-detail{font-size:12px;color:var(--mid);margin-top:2px;}
+.store-badge{font-size:13px;font-weight:700;padding:5px 12px;border-radius:6px;}
+.badge-ps{background:#E8F5E9;color:#1B5E20;}
+.badge-as{background:#E3F2FD;color:#0D47A1;}
+
+/* ── SENTIMENT ── */
+.sentiment-bars{display:flex;height:22px;border-radius:6px;overflow:hidden;gap:2px;margin:16px 0 10px;}
+.sent-pos{background:var(--green);}
+.sent-neu{background:#FFC107;}
+.sent-neg{background:var(--red);}
+.sent-legend{display:flex;gap:18px;flex-wrap:wrap;}
+.sent-item{font-size:12px;color:var(--mid);display:flex;align-items:center;gap:5px;}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
+
+/* ── STRENGTHS / WEAKNESSES ── */
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.sw-item{padding:14px 0;border-bottom:1px solid #f0f0f0;}
+.sw-item:last-child{border-bottom:none;}
+.sw-item-header{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.sw-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.sw-icon.pos{background:var(--green-pale);color:var(--green);}
+.sw-icon.neg{background:var(--red-pale);color:var(--red);}
+.sw-title{font-size:13px;font-weight:700;color:var(--dark);}
+.sw-desc{font-size:12px;color:var(--mid);line-height:1.55;margin-bottom:8px;}
+.sw-quotes{display:flex;flex-direction:column;gap:4px;}
+.sw-quote{font-size:11px;color:var(--mid);background:var(--light);border-radius:5px;padding:5px 9px;line-height:1.45;border-left:2px solid #e0e0e0;}
+
+/* ── CHART ── */
+.chart-container{position:relative;width:100%;height:240px;}
+
+/* ── DIVIDER ── */
+.page-divider{height:1px;background:linear-gradient(90deg,transparent,#ddd 20%,#ddd 80%,transparent);margin:8px 48px 40px;}
+
+/* ── TABS (frizioni) ── */
+.tabs{display:flex;gap:3px;background:var(--light);border:1px solid #e2e2e2;border-radius:8px;padding:3px;margin-bottom:22px;width:fit-content;}
+.tab{padding:7px 18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-radius:6px;cursor:pointer;border:none;background:transparent;color:var(--mid);font-family:var(--font);transition:all .18s;}
+.tab.active{background:var(--white);color:var(--dark);box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ── TOPIC CARDS ── */
+.topic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.topic-card{background:var(--white);border-radius:10px;border:1px solid #eaeaea;padding:16px;cursor:pointer;transition:box-shadow .15s,border-color .15s;}
+.topic-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);border-color:#d0d0d0;}
+.topic-card.selected{border-color:var(--red);box-shadow:0 0 0 2px var(--red-pale);}
+.tc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:8px;}
+.tc-name{font-size:13px;font-weight:700;color:var(--dark);line-height:1.3;}
+.tc-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em;}
+.badge-critical{background:var(--red-pale);color:var(--red);}
+.badge-high{background:var(--orange-pale);color:var(--orange);}
+.badge-medium{background:var(--yellow-pale);color:#946400;}
+.badge-low{background:var(--green-pale);color:var(--green);}
+.tc-stats{display:flex;gap:12px;flex-wrap:wrap;}
+.tc-stat{font-size:12px;color:var(--mid);}
+.tc-stat strong{color:var(--dark);font-weight:700;}
+.tc-bar-wrap{margin-top:10px;background:#f0f0f0;border-radius:4px;height:5px;overflow:hidden;}
+.tc-bar{height:100%;border-radius:4px;}
+
+/* ── DETAIL PANEL ── */
+.detail-panel{background:var(--white);border-radius:10px;border:1px solid #eaeaea;padding:28px;margin-top:16px;}
+.detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:14px;}
+.detail-title{font-size:16px;font-weight:700;color:var(--dark);}
+.detail-kpis{display:flex;gap:24px;}
+.detail-kpi-val{font-size:24px;font-weight:700;line-height:1;}
+.detail-kpi-lbl{font-size:10px;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;}
+.q-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);margin-bottom:10px;}
+.quote-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f4f4f4;align-items:flex-start;}
+.quote-item:last-child{border-bottom:none;}
+.q-stars{font-size:11px;flex-shrink:0;margin-top:1px;letter-spacing:1px;}
+.q-text{font-size:12px;color:var(--mid);line-height:1.6;}
+
+/* ── MATRIX TABLE ── */
+.matrix-wrap{overflow-x:auto;background:var(--white);border-radius:10px;border:1px solid #eaeaea;}
+.matrix-table{width:100%;border-collapse:collapse;font-size:12px;}
+.matrix-table th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);padding:12px 16px;border-bottom:1px solid #eaeaea;text-align:left;white-space:nowrap;background:var(--light);}
+.matrix-table td{padding:11px 16px;border-bottom:1px solid #f5f5f5;vertical-align:middle;}
+.matrix-table tr:last-child td{border-bottom:none;}
+.matrix-table tr:hover td{background:#fafafa;}
+.impact-pill{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;gap:4px;}
+.neg-bar-wrap{background:#f0f0f0;border-radius:3px;height:8px;width:80px;overflow:hidden;display:inline-block;vertical-align:middle;}
+.neg-bar{height:100%;border-radius:3px;}
+.pri-dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;}
+
+/* ── INSIGHTS ── */
+.insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.insight-card{background:var(--white);border-radius:10px;border:1px solid #eaeaea;padding:20px;}
+.insight-card.red-accent{border-left:3px solid var(--red);}
+.insight-card.orange-accent{border-left:3px solid var(--orange);}
+.insight-card.green-accent{border-left:3px solid var(--green);}
+.insight-card.blue-accent{border-left:3px solid var(--blue);}
+.insight-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;}
+.insight-tag.red{color:var(--red);}
+.insight-tag.orange{color:var(--orange);}
+.insight-tag.green{color:var(--green);}
+.insight-tag.blue{color:var(--blue);}
+.insight-title{font-size:13px;font-weight:700;color:var(--dark);margin-bottom:7px;line-height:1.4;}
+.insight-body{font-size:12px;color:var(--mid);line-height:1.65;}
+
+/* ── FOOTER ── */
+.footer{padding:24px 48px;border-top:1px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.footer-brand{font-size:12px;color:#aaa;}
+.footer-brand strong{color:var(--mid);}
+.footer-date{font-size:12px;color:#aaa;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .header{padding:18px 24px;}
+  .hero{padding:28px 24px 32px;}
+  .section{padding:0 24px;}
+  .page-divider{margin:8px 24px 32px;}
+  .footer{padding:18px 24px;}
+  .kpi-grid{grid-template-columns:1fr 1fr;}
+  .two-col,.sw-grid,.insight-grid{grid-template-columns:1fr;}
+  .topic-grid{grid-template-columns:1fr 1fr;}
+  .hero-title{font-size:24px;}
+}
+@media(max-width:480px){
+  .kpi-grid{grid-template-columns:1fr 1fr;}
+  .topic-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-logo">
+      <img src="https://mocainteractive.com/assets/svg/logo-light.svg" alt="MOCA Interactive">
+    </div>
+    <div class="header-meta">
+      <div class="label">Report</div>
+      <div class="value">Analisi Recensioni App — Marzo 2026</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Review Intelligence · Vittoria Assicurazioni</div>
+    <div class="hero-title">Analisi Recensioni<br>App Store & Play Store</div>
+    <div class="hero-sub">2.284 recensioni analizzate · 1.631 con testo · Aggiornato al 24 marzo 2026</div>
+    <div class="hero-nav">
+      <a href="#panoramica" class="hero-nav-btn active">Panoramica</a>
+      <a href="#distribuzione" class="hero-nav-btn">Distribuzione</a>
+      <a href="#trend" class="hero-nav-btn">Trend</a>
+      <a href="#forze-debolezze" class="hero-nav-btn">Punti di Forza & Debolezze</a>
+      <a href="#frizioni" class="hero-nav-btn">Frizioni & Servizi</a>
+      <a href="#raccomandazioni" class="hero-nav-btn">Raccomandazioni</a>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: KPI ── -->
+  <div class="section">
+    <span class="section-anchor" id="panoramica"></span>
+    <div class="note">
+      <div class="note-text">Il totale di 2.284 recensioni rappresenta il massimo dei dati pubblicamente accessibili tramite API. Il numero visibile sugli store ufficiali include migliaia di valutazioni silenziose (solo stelle, senza testo), escluse da questa analisi. I dati qui riportati si basano sull'intero set di recensioni scritte realmente disponibili.</div>
+    </div>
+    <div class="section-label">KPI OVERVIEW</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Totale Recensioni</div>
+        <div class="kpi-value">2.284</div>
+        <div class="kpi-sub">App Store + Play Store</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Rating Medio</div>
+        <div class="kpi-value blue">3,16 ★</div>
+        <div class="kpi-sub">Su scala da 1 a 5</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Sentiment Positivo</div>
+        <div class="kpi-value green">54,3%</div>
+        <div class="kpi-sub"><strong>757</strong> recensioni positive</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Sentiment Negativo</div>
+        <div class="kpi-value red">40,0%</div>
+        <div class="kpi-sub"><strong>763</strong> recensioni negative</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: DISTRIBUZIONE ── -->
+  <div class="section">
+    <span class="section-anchor" id="distribuzione"></span>
+    <div class="section-label">DISTRIBUZIONE & CONFRONTO STORE</div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Distribuzione Stelle</div>
+        <div class="star-row">
+          <div class="star-label">5★</div>
+          <div class="star-count">1.008</div>
+          <div class="bar-wrap"><div class="bar-fill bar-5" style="width:44.1%"></div></div>
+          <div class="star-pct">44,1%</div>
+        </div>
+        <div class="star-row">
+          <div class="star-label">4★</div>
+          <div class="star-count">232</div>
+          <div class="bar-wrap"><div class="bar-fill bar-4" style="width:10.2%"></div></div>
+          <div class="star-pct">10,2%</div>
+        </div>
+        <div class="star-row">
+          <div class="star-label">3★</div>
+          <div class="star-count">131</div>
+          <div class="bar-wrap"><div class="bar-fill bar-3" style="width:5.7%"></div></div>
+          <div class="star-pct">5,7%</div>
+        </div>
+        <div class="star-row">
+          <div class="star-label">2★</div>
+          <div class="star-count">157</div>
+          <div class="bar-wrap"><div class="bar-fill bar-2" style="width:6.9%"></div></div>
+          <div class="star-pct">6,9%</div>
+        </div>
+        <div class="star-row">
+          <div class="star-label">1★</div>
+          <div class="star-count">756</div>
+          <div class="bar-wrap"><div class="bar-fill bar-1" style="width:33.1%"></div></div>
+          <div class="star-pct">33,1%</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Confronto per Store</div>
+        <div class="store-row">
+          <div>
+            <div class="store-name">Google Play Store</div>
+            <div class="store-detail">1.757 recensioni · 76,9% del totale</div>
+          </div>
+          <div class="store-badge badge-ps">★ 3,44</div>
+        </div>
+        <div class="store-row">
+          <div>
+            <div class="store-name">Apple App Store</div>
+            <div class="store-detail">527 recensioni · 23,1% del totale</div>
+          </div>
+          <div class="store-badge badge-as">★ 2,22</div>
+        </div>
+        <div style="margin-top:22px;">
+          <div class="card-title" style="margin-bottom:10px;">Distribuzione Sentiment</div>
+          <div class="sentiment-bars">
+            <div class="sent-pos" style="flex:43.5"></div>
+            <div class="sent-neu" style="flex:11.5"></div>
+            <div class="sent-neg" style="flex:45"></div>
+          </div>
+          <div class="sent-legend">
+            <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positivo 43,5%</div>
+            <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutro 11,5%</div>
+            <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negativo 40,0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: TREND ── -->
+  <div class="section">
+    <span class="section-anchor" id="trend"></span>
+    <div class="section-label">TREND TEMPORALE</div>
+    <div class="card">
+      <div class="card-title">Rating Medio Mensile — Ultimi 36 Mesi</div>
+      <div class="chart-container">
+        <canvas id="trendChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: STRENGTHS / WEAKNESSES ── -->
+  <div class="section">
+    <span class="section-anchor" id="forze-debolezze"></span>
+    <div class="section-label">ANALISI AI — PUNTI DI FORZA & AREE DI MIGLIORAMENTO</div>
+    <div class="sw-grid">
+      <div class="card">
+        <div class="card-title" style="color:var(--green)">Punti di Forza</div>
+        <div id="strengthsList"></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color:var(--red)">Aree di Miglioramento</div>
+        <div id="weaknessesList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-divider"></div>
+
+  <!-- ── SECTION 5: FRIZIONI ── -->
+  <div class="section">
+    <span class="section-anchor" id="frizioni"></span>
+    <div class="section-label">FRIZIONI & SERVIZI — ANALISI QUALITATIVA</div>
+    <div style="margin-bottom:8px;font-size:13px;color:var(--mid);line-height:1.6;">
+      Analisi condotta su <strong style="color:var(--dark)">1.631</strong> recensioni con testo. Ogni area è classificata per frequenza, rating medio e percentuale di valutazioni negative, con esempi estratti direttamente dalle recensioni.
+    </div>
+    <div style="height:16px;"></div>
+    <div class="tabs">
+      <button class="tab active" onclick="showFrizioniTab('topics')">Aree Tematiche</button>
+      <button class="tab" onclick="showFrizioniTab('matrix')">Matrice Priorità</button>
+    </div>
+
+    <!-- Sub-tab: Topics -->
+    <div class="tab-panel active" id="ftab-topics">
+      <div style="font-size:11px;color:var(--mid);margin-bottom:14px;">Clicca su un'area per vedere descrizione ed esempi di recensioni.</div>
+      <div class="topic-grid" id="topicGrid"></div>
+      <div id="detailPanel" style="display:none;"></div>
+    </div>
+
+    <!-- Sub-tab: Matrix -->
+    <div class="tab-panel" id="ftab-matrix">
+      <div class="matrix-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Frizione Specifica</th>
+              <th>Menzioni</th>
+              <th>Rating Medio</th>
+              <th>% Negativi</th>
+              <th>Priorità</th>
+            </tr>
+          </thead>
+          <tbody id="matrixBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 6: RACCOMANDAZIONI ── -->
+  <div class="section">
+    <span class="section-anchor" id="raccomandazioni"></span>
+    <div class="section-label">RACCOMANDAZIONI STRATEGICHE</div>
+    <div class="insight-grid" id="insightGrid"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Elaborato da <strong>MOCA Interactive</strong> · mocainteractive.com</div>
+    <div class="footer-date">24 Marzo 2026</div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+/* ──────────────────────────────────────────
+   DATI
+────────────────────────────────────────── */
+const trendData = [
+  {date:'2023-05',avg:4.6,count:44},{date:'2023-06',avg:4.5,count:37},{date:'2023-07',avg:4.4,count:27},
+  {date:'2023-08',avg:4.2,count:32},{date:'2023-09',avg:4.0,count:27},{date:'2023-10',avg:3.6,count:27},
+  {date:'2023-11',avg:4.5,count:30},{date:'2023-12',avg:4.2,count:32},
+  {date:'2024-01',avg:4.4,count:25},{date:'2024-02',avg:4.1,count:40},{date:'2024-03',avg:3.8,count:29},
+  {date:'2024-04',avg:3.8,count:35},{date:'2024-05',avg:3.9,count:24},{date:'2024-06',avg:4.0,count:25},
+  {date:'2024-07',avg:4.0,count:32},{date:'2024-08',avg:3.6,count:20},{date:'2024-09',avg:3.6,count:28},
+  {date:'2024-10',avg:4.0,count:20},{date:'2024-11',avg:3.7,count:22},{date:'2024-12',avg:4.6,count:20},
+  {date:'2025-01',avg:3.7,count:22},{date:'2025-02',avg:3.9,count:25},{date:'2025-03',avg:4.3,count:29},
+  {date:'2025-04',avg:4.1,count:34},{date:'2025-05',avg:4.2,count:40},{date:'2025-06',avg:3.6,count:18},
+  {date:'2025-07',avg:4.4,count:16},{date:'2025-08',avg:3.8,count:49},{date:'2025-09',avg:3.8,count:31},
+  {date:'2025-10',avg:4.2,count:26},{date:'2025-11',avg:3.8,count:23},{date:'2025-12',avg:4.1,count:26},
+  {date:'2026-01',avg:3.5,count:33},{date:'2026-02',avg:3.4,count:26},{date:'2026-03',avg:3.3,count:14}
+];
+
+const strengths = [
+  {title:"Usabilità dell'app",desc:"L'app è considerata molto intuitiva e facile da usare, accessibile a un'ampia gamma di utenti.",quotes:["app. semplice, intuitiva e funzionale.","Applicazione molto semplice e intuitiva.","Comoda e intuitiva"]},
+  {title:"Soddisfazione Generale",desc:"Alto livello di soddisfazione, con utenti che sottolineano efficienza e convenienza e la consigliano attivamente.",quotes:["Pratica ed efficiente, voto 10 !!!","Molto soddisfatto, la consiglio a tutti"]},
+  {title:"Servizio Clienti",desc:"Il servizio clienti è apprezzato per disponibilità e professionalità, in particolare nelle filiali fisiche.",quotes:["Ottimo servizio clienti","Assicuratori gentilissimi e disponibili per ogni chiarimento"]},
+  {title:"Qualità del Servizio",desc:"La qualità complessiva del servizio è considerata eccellente, con personale competente e preparato.",quotes:["Molto competenti. Cercano sempre la migliore soluzione per il cliente.","Ottimo servizio e assistenza costante"]},
+  {title:"Funzionalità",desc:"L'app offre funzionalità utili che semplificano la gestione di scadenze, documenti e polizze.",quotes:["App completa e semplice da usare","Utile per scadenze e pagamenti"]}
+];
+
+const weaknesses = [
+  {title:"Problemi di Accesso",desc:"Difficoltà croniche di login: password richiesta ad ogni apertura, blocchi account, SPID obbligatorio ma spesso non funzionante.",quotes:["Per entrare devi sputare sangue.....","Sempre problemi con l'accesso."]},
+  {title:"Problemi Tecnici",desc:"Frequenti malfunzionamenti e bug rendono l'app poco affidabile, specialmente nei momenti critici come i pagamenti.",quotes:["App terribile. Da un'ora sto cercando di pagare ma non funziona.","Ha sempre qualcosa che non funziona"]},
+  {title:"Bug e Malfunzionamenti",desc:"Bug ricorrenti che compromettono l'esperienza d'uso. Ogni aggiornamento introduce nuovi problemi.",quotes:["Non si apre più l'applicazione.","Continuamente devo reinstallarla"]},
+  {title:"Aggiornamenti Problematici",desc:"Gli aggiornamenti sono percepiti come fonte di nuovi bug. Il ciclo di rilascio non è accompagnato da adeguato QA.",quotes:["Ad ogni aggiornamento si porta nuovi problemi"]},
+  {title:"Utilità Percepita",desc:"Una parte degli utenti trova l'app poco utile rispetto alle aspettative, con funzionalità core non operative.",quotes:["Non riesco a fare nulla con questa app"]}
+];
+
+const topics = [
+  {name:'Pagamento Polizza',count:407,avg:2.67,neg:52.8,priority:'critical',
+   desc:'Il topic più menzionato. Oltre la metà delle review negative riguarda l\'impossibilità di pagare la polizza tramite app, errori durante il checkout e mancanza di metodi di pagamento moderni.',
+   quotes:[{r:1,t:'Pessima, sto cercando di pagare e continuo a ricevere errore. Non credo esista un\'app assicurativa peggiore.'},{r:1,t:'Da quando esiste questa applicazione non è mai stato possibile pagare la propria polizza. Siamo nel 2024 e anche il gelato si paga con il pos!'},{r:1,t:'Consenso ai fini di marketing impossibile da disattivare se si vuole usare l\'app. Obbligatorio per procedere al pagamento.'},{r:5,t:'Ottima app per gestire le proprie coperture, pagare, sospendere e riattivare in autonomia le polizze.'}]},
+  {name:'Crash & Bug Tecnici',count:345,avg:1.87,neg:74.5,priority:'critical',
+   desc:'Crash, blocchi e bug tecnici ricorrenti. L\'app si blocca al caricamento, perde le credenziali dopo un aggiornamento e smette di funzionare in modo imprevedibile.',
+   quotes:[{r:2,t:'Il sistema di autenticazione va spesso in errore. App spesso non funziona e perde le credenziali.'},{r:1,t:'Dopo l\'aggiornamento non è cambiato niente. Errore percorso rete quando si tenta di scaricare qualsiasi documento.'},{r:1,t:'Ha sempre qualcosa che non funziona. Continuamente devo reinstallarla per farla partire.'}]},
+  {name:'Login & Accesso',count:284,avg:2.17,neg:66.5,priority:'critical',
+   desc:'Problemi cronici di login: password richiesta ad ogni apertura, blocchi improvvisi dell\'account, SPID obbligatorio ma spesso non funzionante, biometria non memorizzata tra una sessione e l\'altra.',
+   quotes:[{r:1,t:'App imbarazzante: ogni tot ti chiede la password, la inserisci, dice che è sbagliata, la cambi e ti dice che è già in uso. Ma come?!'},{r:1,t:'L\'app mi dice che sono già registrata ma non ho mai fatto registrazione. Anche con SPID continua a dirmi che la mia email è già registrata.'},{r:2,t:'L\'app chiede la password ad ogni accesso e l\'autorizzazione alla profilazione ad ogni avvio.'}]},
+  {name:'Documenti',count:209,avg:2.53,neg:58.4,priority:'high',
+   desc:'Download di documenti fallisce frequentemente. I file non sono ordinati cronologicamente, i titoli non sono chiari e l\'attestato di rischio non è accessibile in modo semplice.',
+   quotes:[{r:1,t:'A distanza di anni, i documenti non seguono l\'ordine cronologico e dai titoli a volte non si comprende nemmeno cosa siano.'},{r:4,t:'Per scaricare l\'attestato dell\'assicurazione è diventato un problema, manco dovessi entrare a Fort Knox.'},{r:1,t:'Errore percorso rete quando si tenta di scaricare qualsiasi documento dalla sezione polizze.'}]},
+  {name:'UX & Navigazione',count:166,avg:3.97,neg:19.9,priority:'medium',
+   desc:'Topic ambivalente: chi valuta positivamente elogia l\'intuitività, chi valuta negativamente lamenta complessità di navigazione e scarsa organizzazione delle informazioni.',
+   quotes:[{r:5,t:'Applicazione molto semplice e intuitiva. Comoda da usare per gestire le polizze.'},{r:3,t:'Non è intuitiva come dovrebbe: troppi passaggi per fare operazioni semplici.'},{r:2,t:'A distanza di anni è sempre più complicata, poco ordinata, poco intuitiva.'}]},
+  {name:'Servizio Clienti',count:163,avg:3.21,neg:42.3,priority:'medium',
+   desc:'Feedback polarizzato: il personale in filiale è molto apprezzato, mentre il call center viene spesso criticato per mancanza di risposta e tempi di attesa lunghi.',
+   quotes:[{r:5,t:'Assicuratori gentilissimi e disponibili per ogni chiarimento. Ottima consulenza professionale.'},{r:1,t:'Il servizio clienti non risponde. Impossibile contattare qualcuno quando hai bisogno.'},{r:1,t:'Il call center, l\'agenzia e l\'ufficio sinistri scaricano la responsabilità l\'uno sull\'altro.'}]},
+  {name:'Aggiornamenti App',count:139,avg:2.22,neg:65.5,priority:'high',
+   desc:'Gli aggiornamenti sono fonte di peggioramenti: ogni nuova versione introduce nuovi bug invece di risolvere i precedenti. La gestione del ciclo di rilascio è percepita come caotica.',
+   quotes:[{r:1,t:'Ad ogni aggiornamento si porta nuovi problemi. Non riesco a capire come sia possibile peggiorare progressivamente.'},{r:1,t:'A distanza di anni: ogni volta che aggiornate l\'app si aggiunge un nuovo problema.'}]},
+  {name:'Notifiche & Scadenze',count:91,avg:2.92,neg:47.3,priority:'medium',
+   desc:'Le scadenze delle polizze scompaiono dal calendario dopo gli aggiornamenti. Le notifiche di promemoria non arrivano o non sono configurabili.',
+   quotes:[{r:1,t:'Dopo l\'aggiornamento nella sezione calendario sono sparite le scadenze delle polizze.'},{r:3,t:'L\'app non mi avvisa mai delle scadenze imminenti. Devo controllare manualmente.'}]},
+  {name:'Sinistri',count:40,avg:2.52,neg:60.0,priority:'high',
+   desc:'Topic a bassa frequenza ma altissimo impatto emotivo. Le recensioni negative riguardano tempi di attesa estenuanti, gestione della perizia e difficoltà di apertura pratica da app.',
+   quotes:[{r:1,t:'Ho aperto un sinistro a luglio per la grandine. Ancora in attesa di riparazione. Il call center non risponde, l\'agenzia scarica la responsabilità.'},{r:1,t:'Inesistente e assenti nel momento dei sinistri. Quando hai davvero bisogno non c\'è nessuno.'},{r:5,t:'Ottima filiale, personale disponibile anche nei momenti difficili di un sinistro.'}]},
+  {name:'SPID / CIE',count:43,avg:3.16,neg:44.2,priority:'medium',
+   desc:'L\'accesso tramite SPID è spesso l\'unica alternativa al login classico, ma risulta problematico. La CIE non è supportata come alternativa gratuita.',
+   quotes:[{r:1,t:'Accesso con OTP oppure SPID. Lo SPID è a pagamento ed è sostituito dalla CIE, ma qui la CIE non è supportata.'},{r:1,t:'Non si logga con SPID. Una volta loggato dopo aver attivato la biometria, all\'avvio successivo se ne dimentica.'}]},
+];
+
+const frictions = [
+  {name:'Password richiesta ad ogni accesso',count:24,avg:1.58,neg:83.3,priority:'critical'},
+  {name:'Consenso marketing forzato per accedere',count:18,avg:1.67,neg:83.3,priority:'critical'},
+  {name:'App si blocca al login',count:97,avg:1.62,neg:82.5,priority:'critical'},
+  {name:'Pagamento polizza non funziona',count:58,avg:1.83,neg:77.6,priority:'critical'},
+  {name:'Download documenti fallisce',count:44,avg:1.77,neg:79.5,priority:'critical'},
+  {name:'App lenta / caricamento bloccato',count:60,avg:1.93,neg:70.0,priority:'high'},
+  {name:'Crash e bug tecnici ricorrenti',count:345,avg:1.87,neg:74.5,priority:'high'},
+  {name:'Nessuna risposta dall\'assistenza',count:16,avg:2.00,neg:75.0,priority:'high'},
+  {name:'Sinistro non gestito correttamente',count:8,avg:1.12,neg:100.0,priority:'high'},
+  {name:'SPID problematico / obbligatorio',count:49,avg:3.02,neg:44.9,priority:'medium'},
+];
+
+const insights = [
+  {accent:'red',tag:'Priorità Massima',title:'Risolvere l\'autenticazione è la singola azione con più impatto',body:'Login bloccato, password richiesta ad ogni apertura e SPID obbligatorio generano il cluster di frizioni con il rating medio più basso (1,58) e l\'83% di negatività. Un\'autenticazione stabile con biometria persistente eliminerebbe la principale causa di 1 stella.'},
+  {accent:'red',tag:'Priorità Massima',title:'Il pagamento polizza in-app non è un\'opzione: è la funzione core',body:'407 menzioni, rating 2,67. Utenti che non riescono a pagare la propria polizza dall\'app sono costretti ad andare in filiale. Questo vanifica il valore principale dello strumento digitale e genera frustrazione proporzionale all\'urgenza del pagamento.'},
+  {accent:'orange',tag:'Azione Rapida',title:'Rimuovere il consenso marketing obbligatorio per accedere all\'app',body:'18 menzioni con rating 1,67. Il consenso alla profilazione forzato per utilizzare l\'app è una non-conformità GDPR e genera recensioni esplicitamente arrabbiate. È un blocco da rimuovere immediatamente, non richiede sviluppo complesso.'},
+  {accent:'orange',tag:'Azione Rapida',title:'Stabilizzare il ciclo di rilascio: ogni update peggiora la situazione',body:'Gli aggiornamenti sono citati come fonte di nuovi bug invece di fix. Un processo di QA più rigoroso prima dei rilasci in produzione, con test di regressione su login, pagamento e download documenti, impedirebbe il deterioramento progressivo del rating.'},
+  {accent:'blue',tag:'Opportunità di Differenziazione',title:'Il servizio umano in filiale è eccellente: va amplificato nel digitale',body:'Le recensioni 5 stelle citano spesso la cortesia e disponibilità degli agenti fisici, anche in situazioni difficili come i sinistri. Integrare meglio il canale digitale con quello umano (chat con agente, prenotazione in-app) trasformerebbe un punto di forza in elemento differenziante.'},
+  {accent:'green',tag:'Quick Win',title:'Sinistri: bassa frequenza ma altissimo impatto reputazionale',body:'Solo 40 menzioni ma rating medio 2,52 con il 100% di negatività per la gestione operativa. Un sinistro è il momento di verità per un\'assicurazione. Migliorare la tracciabilità della pratica da app trasformerebbe l\'esperienza critica in un momento di fiducia.'},
+];
+
+/* ──────────────────────────────────────────
+   HELPERS
+────────────────────────────────────────── */
+function priorityStyle(p){
+  if(p==='critical') return {cls:'badge-critical',label:'Critica',color:'#E52217'};
+  if(p==='high')     return {cls:'badge-high',label:'Alta',color:'#DB5E29'};
+  if(p==='medium')   return {cls:'badge-medium',label:'Media',color:'#946400'};
+  return {cls:'badge-low',label:'Bassa',color:'#118541'};
+}
+function barColor(neg){
+  if(neg>=75) return '#E52217';
+  if(neg>=55) return '#DB5E29';
+  if(neg>=40) return '#F5A623';
+  return '#118541';
+}
+function starsHtml(r,negColor){
+  const c = r<=2 ? '#E52217' : r===3 ? '#F5A623' : '#118541';
+  return `<span style="color:${c};font-size:11px;letter-spacing:1px">${'★'.repeat(r)}${'☆'.repeat(5-r)}</span>`;
+}
+
+/* ──────────────────────────────────────────
+   CHART TREND
+────────────────────────────────────────── */
+const months = ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'];
+const labels = trendData.map(d=>{
+  const [y,m] = d.date.split('-');
+  return months[parseInt(m)-1]+' '+y.slice(2);
+});
+
+new Chart(document.getElementById('trendChart'),{
+  type:'line',
+  data:{
+    labels,
+    datasets:[{
+      label:'Rating Medio',
+      data:trendData.map(d=>d.avg),
+      borderColor:'#E52217',
+      backgroundColor:'rgba(229,34,23,0.06)',
+      borderWidth:2,
+      pointRadius:3,
+      pointBackgroundColor:'#E52217',
+      pointBorderColor:'#fff',
+      pointBorderWidth:1.5,
+      tension:0.35,
+      fill:true
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#191919',titleColor:'#fff',bodyColor:'#ccc',
+        padding:10,cornerRadius:6,
+        callbacks:{label:ctx=>' Rating: '+ctx.parsed.y.toFixed(1)}
+      }
+    },
+    scales:{
+      x:{grid:{display:false},ticks:{font:{family:'Figtree',size:10},color:'#999',maxRotation:45,autoSkip:false,callback:(v,i)=>i%3===0?labels[i]:''}},
+      y:{min:1,max:5,grid:{color:'#f0f0f0'},ticks:{font:{family:'Figtree',size:10},color:'#999',stepSize:1}}
+    }
+  }
+});
+
+/* ──────────────────────────────────────────
+   STRENGTHS / WEAKNESSES
+────────────────────────────────────────── */
+function renderSwList(items, containerId, isPos){
+  const el = document.getElementById(containerId);
+  el.innerHTML = items.map(it=>`
+    <div class="sw-item">
+      <div class="sw-item-header">
+        <div class="sw-icon ${isPos?'pos':'neg'}">${isPos?'+':'−'}</div>
+        <div class="sw-title">${it.title}</div>
+      </div>
+      <div class="sw-desc">${it.desc}</div>
+      <div class="sw-quotes">${it.quotes.map(q=>`<div class="sw-quote">"${q}"</div>`).join('')}</div>
+    </div>
+  `).join('');
+}
+renderSwList(strengths,'strengthsList',true);
+renderSwList(weaknesses,'weaknessesList',false);
+
+/* ──────────────────────────────────────────
+   TOPIC GRID
+────────────────────────────────────────── */
+let selectedCard = null;
+const grid = document.getElementById('topicGrid');
+topics.forEach((t,i)=>{
+  const p = priorityStyle(t.priority);
+  const pct = Math.min(t.count/407*100,100);
+  const card = document.createElement('div');
+  card.className = 'topic-card';
+  card.innerHTML = `
+    <div class="tc-header">
+      <div class="tc-name">${t.name}</div>
+      <div class="tc-badge ${p.cls}">${p.label}</div>
+    </div>
+    <div class="tc-stats">
+      <div class="tc-stat"><strong>${t.count}</strong> menzioni</div>
+      <div class="tc-stat">★ <strong>${t.avg.toFixed(2)}</strong></div>
+      <div class="tc-stat" style="color:${barColor(t.neg)}"><strong>${t.neg}%</strong> neg.</div>
+    </div>
+    <div class="tc-bar-wrap"><div class="tc-bar" style="width:${pct}%;background:${barColor(t.neg)}"></div></div>
+  `;
+  card.onclick=()=>selectTopic(i,card);
+  grid.appendChild(card);
+});
+
+function selectTopic(i,card){
+  if(selectedCard) selectedCard.classList.remove('selected');
+  card.classList.add('selected');
+  selectedCard = card;
+  const t = topics[i];
+  const panel = document.getElementById('detailPanel');
+  panel.style.display='block';
+  panel.innerHTML=`
+    <div class="detail-panel">
+      <div class="detail-header">
+        <div class="detail-title">${t.name}</div>
+        <div class="detail-kpis">
+          <div>
+            <div class="detail-kpi-val" style="color:var(--dark)">${t.count}</div>
+            <div class="detail-kpi-lbl">Menzioni</div>
+          </div>
+          <div>
+            <div class="detail-kpi-val" style="color:var(--blue)">★ ${t.avg.toFixed(2)}</div>
+            <div class="detail-kpi-lbl">Rating medio</div>
+          </div>
+          <div>
+            <div class="detail-kpi-val" style="color:${barColor(t.neg)}">${t.neg}%</div>
+            <div class="detail-kpi-lbl">% Negativi</div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--mid);line-height:1.65;margin-bottom:18px;">${t.desc}</p>
+      <div class="q-label">Citazioni rappresentative</div>
+      ${t.quotes.map(q=>`
+        <div class="quote-item">
+          ${starsHtml(q.r)}
+          <div class="q-text">"${q.t}"</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+}
+
+/* ──────────────────────────────────────────
+   MATRIX
+────────────────────────────────────────── */
+const tbody = document.getElementById('matrixBody');
+const sorted = [...frictions].sort((a,b)=>{
+  const ord={critical:0,high:1,medium:2,low:3};
+  return ord[a.priority]-ord[b.priority]||b.neg-a.neg;
+});
+sorted.forEach(f=>{
+  const p = priorityStyle(f.priority);
+  const tr = document.createElement('tr');
+  tr.innerHTML=`
+    <td style="font-size:13px;font-weight:600;color:var(--dark)">${f.name}</td>
+    <td style="font-size:13px;color:var(--mid)">${f.count}</td>
+    <td style="font-size:13px;color:${barColor(f.neg)};font-weight:600;">★ ${f.avg.toFixed(2)}</td>
+    <td>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="neg-bar-wrap"><div class="neg-bar" style="width:${f.neg}%;background:${barColor(f.neg)}"></div></div>
+        <span style="font-size:12px;color:${barColor(f.neg)};font-weight:600;">${f.neg}%</span>
+      </div>
+    </td>
+    <td><span class="impact-pill ${p.cls}"><span class="pri-dot" style="background:${p.color}"></span>${p.label}</span></td>
+  `;
+  tbody.appendChild(tr);
+});
+
+/* ──────────────────────────────────────────
+   INSIGHTS
+────────────────────────────────────────── */
+const ig = document.getElementById('insightGrid');
+insights.forEach(ins=>{
+  const div = document.createElement('div');
+  div.className=`insight-card ${ins.accent}-accent`;
+  div.innerHTML=`
+    <div class="insight-tag ${ins.accent}">${ins.tag}</div>
+    <div class="insight-title">${ins.title}</div>
+    <div class="insight-body">${ins.body}</div>
+  `;
+  ig.appendChild(div);
+});
+
+/* ──────────────────────────────────────────
+   TABS FRIZIONI
+────────────────────────────────────────── */
+function showFrizioniTab(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>{
+    t.classList.toggle('active',['topics','matrix'][i]===name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('ftab-'+name).classList.add('active');
+}
+
+/* ──────────────────────────────────────────
+   NAV HIGHLIGHT ON SCROLL
+────────────────────────────────────────── */
+const sections = ['panoramica','distribuzione','trend','forze-debolezze','frizioni','raccomandazioni'];
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && window.scrollY >= el.offsetTop - 120) current=id;
+  });
+  document.querySelectorAll('.hero-nav-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.getAttribute('href')==='#'+current);
+  });
+},{passive:true});
+</script>
+</body>
+</html>
