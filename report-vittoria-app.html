@@ -623,17 +623,20 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
 /* ══════════════════════════════════════════════════════════════════
    CONFIGURAZIONE — DATI ESTERNI DA COMPLETARE
    ──────────────────────────────────────────────────────────────────
-   1) STORE_TOTALS — valutazione "totale" pubblicata sulla scheda dello
-      store, quella che comprende anche le valutazioni con sole stelline.
-      NON è ricavabile dal set di recensioni analizzato: va letta dalla
-      scheda dello store (o da uno scraper) e inserita qui.
+   1) STORE_TOTALS — [COMPLETATO il 4 agosto 2026]
+      Valutazione "totale" pubblicata sulla scheda dello store, quella che
+      comprende anche le valutazioni con sole stelline. NON è ricavabile dal
+      set di recensioni analizzato: va letta dalla scheda dello store.
          rating → voto medio mostrato dallo store   (es. 4.1)
          count  → numero totale di valutazioni      (es. 18500)
       Schede di riferimento:
          Android → https://play.google.com/store/apps/details?id=it.vittoria.assicurazioni&hl=it
          Apple   → https://apps.apple.com/it/app/myvittoria/id444690713
-      Finché i valori sono null il report mostra "—" con un avviso
-      esplicito, senza inventare numeri.
+      Valori rilevati: Android 4,50 ★ su 13.086 valutazioni · Apple 4,63 ★ su
+      9.556 valutazioni. Per aggiornarli basta rileggere le due schede e
+      riscrivere STORE_TOTALS e STORE_TOTALS_DATE: KPI, scostamento e tabella
+      si ricalcolano da soli. Se i valori tornano a null il report mostra "—"
+      con un avviso esplicito, senza inventare numeri.
 
    2) STORE_SPLIT — scomposizione per store di aree tematiche e frizioni,
       necessaria al filtro Apple / Android della sezione criticità.
@@ -657,10 +660,16 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
       pannello esplicativo invece di numeri aggregati, che verrebbero
       letti erroneamente come dati di quello store.
 ══════════════════════════════════════════════════════════════════ */
+/* Valutazione totale delle schede store — rilevata il 4 agosto 2026 (storefront IT).
+   Fonte: scraping delle schede pubbliche dei due store.
+   Attenzione: è una fotografia alla data di rilevazione, successiva alla chiusura
+   del set di recensioni analizzato (24 marzo 2026). Le due date sono volutamente
+   distinte e vengono dichiarate in chiaro nel report. */
 const STORE_TOTALS = {
-  android: { rating: null, count: null },   // Google Play Store
-  apple:   { rating: null, count: null }    // Apple App Store
+  android: { rating: 4.50, count: 13086 },  // Google Play Store — istogramma 1★:501 2★:261 3★:606 4★:2478 5★:9235
+  apple:   { rating: 4.63, count: 9556 }    // Apple App Store
 };
+const STORE_TOTALS_DATE = '4 agosto 2026';
 
 const STORE_SPLIT = null;
 
@@ -841,7 +850,14 @@ function renderRatingComparison(){
   /* Avviso dati mancanti */
   const todo = document.getElementById('totalsTodo');
   if(overall){
-    todo.innerHTML = '';
+    todo.innerHTML = `<div class="note"><div class="note-text">
+      <strong>Due date di rilevazione diverse.</strong> La valutazione totale è letta dalle schede
+      pubbliche dei due store (storefront italiano) il <strong>${STORE_TOTALS_DATE}</strong> ed è una
+      fotografia a quella data: <strong>${nf(STORE_TOTALS.android.count)}</strong> valutazioni su Google Play
+      e <strong>${nf(STORE_TOTALS.apple.count)}</strong> su App Store. Le recensioni con testo analizzate nel
+      resto del report si fermano invece al <strong>24 marzo 2026</strong>. Lo scostamento va quindi letto
+      come ordine di grandezza strutturale, non come differenza calcolata sullo stesso istante.
+    </div></div>`;
   }else{
     const missing = ['android','apple'].filter(k=>!hasTotals(k)).map(k=>storeMeta[k].label).join(' e ');
     todo.innerHTML = `<div class="note todo"><div class="note-text">
