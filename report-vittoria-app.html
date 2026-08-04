@@ -277,7 +277,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
   <div class="hero">
     <div class="hero-tag">Review Intelligence · Vittoria Assicurazioni</div>
     <div class="hero-title">Analisi Recensioni<br>App Store & Play Store</div>
-    <div class="hero-sub">2.284 recensioni con testo analizzate · Periodo maggio 2023 — 24 marzo 2026</div>
+    <div class="hero-sub">2.007 recensioni con testo analizzate · Pubblicate fino al 24 marzo 2026</div>
     <div class="hero-nav">
       <a href="#panoramica" class="hero-nav-btn active">Panoramica</a>
       <a href="#valutazione-totale" class="hero-nav-btn">Valutazione Totale</a>
@@ -296,23 +296,23 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
     <div class="section-label">PERIODO DI ANALISI</div>
     <div class="period-band">
       <div class="period-item">
-        <div class="period-lbl">Finestra osservata</div>
+        <div class="period-lbl">Finestra delle serie temporali</div>
         <div class="period-val">1 mag 2023 → 24 mar 2026</div>
-        <div class="period-note">35 mesi di rilevazione continuativa</div>
+        <div class="period-note">35 mesi continuativi: trend e focus ultimo anno</div>
       </div>
       <div class="period-item">
         <div class="period-lbl">Data di estrazione</div>
-        <div class="period-val">24 marzo 2026</div>
-        <div class="period-note">Recensioni pubblicate fino a questa data</div>
+        <div class="period-val">4 agosto 2026</div>
+        <div class="period-note">Scraping dei due store; finestra troncata al 24 marzo 2026</div>
       </div>
       <div class="period-item">
         <div class="period-lbl">Recensioni con testo</div>
-        <div class="period-val">2.284</div>
-        <div class="period-note">Base di tutte le analisi qualitative del report</div>
+        <div class="period-val">2.007</div>
+        <div class="period-note">Base di tutte le analisi qualitative: l'intero storico pubblicato fino al 24 marzo 2026</div>
       </div>
       <div class="period-item">
-        <div class="period-lbl">Di cui datate al mese</div>
-        <div class="period-val">988</div>
+        <div class="period-lbl">Di cui nella finestra</div>
+        <div class="period-val">964</div>
         <div class="period-note">Base delle serie mensili (trend e focus ultimo anno)</div>
       </div>
     </div>
@@ -321,19 +321,89 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
       <a href="https://apps.apple.com/it/app/myvittoria/id444690713" target="_blank" rel="noopener">MyVittoria <span>· App Store IT · id 444690713</span></a>
       <a href="https://play.google.com/store/apps/details?id=it.vittoria.assicurazioni&amp;hl=it" target="_blank" rel="noopener">Vittoria Assicurazioni <span>· Play Store IT · it.vittoria.assicurazioni</span></a>
     </div>
+
+    <div class="card" style="margin-top:22px;">
+      <div class="card-title">Copertura del dato — perché 2.007 e non 22.642</div>
+      <div style="font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:14px;">
+        La scheda App Store mostra <strong>9,6K valutazioni</strong> e quella Google Play <strong>13.086</strong>: sono
+        <strong>valutazioni</strong>, cioè stelline assegnate con un tap. Solo una piccola minoranza di chi valuta scrive
+        anche un testo, e <strong>solo il testo è analizzabile</strong>: senza parole non c'è motivazione da classificare.
+        Su Google Play il rapporto è misurabile — la scheda dichiara <strong>1.782 recensioni con testo</strong> su
+        13.086 valutazioni, cioè il <strong>13,6%</strong>. Apple non pubblica il dato equivalente.
+      </div>
+      <div class="matrix-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Store</th>
+              <th>Valutazioni totali</th>
+              <th>Con testo (dichiarate)</th>
+              <th>Estratte</th>
+              <th>Copertura</th>
+              <th>Nella base</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-size:13px;font-weight:600;color:var(--dark)">Google Play Store</td>
+              <td style="font-size:13px;color:var(--mid)">13.086</td>
+              <td style="font-size:13px;color:var(--dark)">1.782</td>
+              <td style="font-size:13px;color:var(--dark)">1.745</td>
+              <td style="font-size:13px;font-weight:700;color:var(--green)">97,9%</td>
+              <td style="font-size:13px;color:var(--mid)">1.652</td>
+            </tr>
+            <tr>
+              <td style="font-size:13px;font-weight:600;color:var(--dark)">Apple App Store</td>
+              <td style="font-size:13px;color:var(--mid)">9.556</td>
+              <td style="font-size:13px;color:var(--mid)">non dichiarate</td>
+              <td style="font-size:13px;color:var(--dark)">380</td>
+              <td style="font-size:13px;font-weight:700;color:var(--orange)">tetto della fonte</td>
+              <td style="font-size:13px;color:var(--mid)">355</td>
+            </tr>
+            <tr>
+              <td style="font-size:13px;font-weight:700;color:var(--dark)">Complessivo</td>
+              <td style="font-size:13px;font-weight:600;color:var(--mid)">22.642</td>
+              <td style="font-size:13px;color:var(--mid)">—</td>
+              <td style="font-size:13px;font-weight:600;color:var(--dark)">2.125</td>
+              <td style="font-size:13px;color:var(--mid)">—</td>
+              <td style="font-size:13px;font-weight:700;color:var(--dark)">2.007</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note todo" style="margin-top:16px;margin-bottom:0;">
+        <div class="note-text">
+          <strong>Il limite è della fonte, non dell'analisi.</strong> Su <strong>Google Play</strong> la copertura è
+          quasi totale: 1.745 recensioni estratte sulle 1.782 con testo dichiarate dalla scheda. Su <strong>App
+          Store</strong> il feed pubblico si ferma a <strong>380 recensioni per storefront</strong>: è un tetto imposto
+          da Apple, verificato interrogando la fonte con cinque estrattori diversi e con tutti e quattro gli
+          ordinamenti disponibili (più recenti, più utili, più favorevoli, più critiche). Tutti restituiscono le stesse
+          380. Apple inoltre <strong>pota il feed nel tempo</strong>: le recensioni più vecchie escono dalla
+          disponibilità pubblica anche se la valutazione resta conteggiata nel totale di 9,6K. Le
+          <strong>2.007 recensioni</strong> della base non sono quindi un campione scelto, ma
+          <strong>tutto ciò che le fonti pubbliche espongono</strong> alla data di estrazione.
+          <br><br>
+          Il conteggio delle valutazioni resta comunque pienamente utilizzato dal report: alimenta la
+          <strong>valutazione totale di store</strong> e lo <strong>scostamento</strong> della sezione seguente, che
+          misurano proprio il peso delle 20.635 valutazioni silenziose. Per ottenere il 100% delle recensioni con
+          testo, incluse quelle non più esposte da Apple, serve un export dai pannelli proprietari
+          <strong>App Store Connect</strong> e <strong>Google Play Console</strong>, accessibili al titolare dell'app.
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ── SECTION 1: KPI ── -->
   <div class="section">
     <span class="section-anchor" id="panoramica"></span>
     <div class="note">
-      <div class="note-text">Esistono <strong>due letture diverse</strong> della stessa app e vanno tenute distinte. La <strong>valutazione totale</strong> è il voto che compare sulla scheda dello store: comprende anche le migliaia di valutazioni silenziose (solo stelline, senza testo) ed è tipicamente più alta. La <strong>valutazione delle recensioni con testo</strong> si basa sulle 2.284 recensioni scritte effettivamente accessibili via API: è il dato più severo, ma è l'unico che consente di capire <em>perché</em> gli utenti valutano così. Il confronto tra le due è nella sezione seguente.</div>
+      <div class="note-text">Esistono <strong>due letture diverse</strong> della stessa app e vanno tenute distinte. La <strong>valutazione totale</strong> è il voto che compare sulla scheda dello store: comprende anche le migliaia di valutazioni silenziose (solo stelline, senza testo) ed è tipicamente più alta. La <strong>valutazione delle recensioni con testo</strong> si basa sulle 2.007 recensioni scritte pubblicate fino al 24 marzo 2026: è il dato più severo, ma è l'unico che consente di capire <em>perché</em> gli utenti valutano così. Il confronto tra le due è nella sezione seguente, mentre il riquadro <strong>Copertura del dato</strong> qui sopra spiega perché le recensioni con testo sono molte meno delle valutazioni.</div>
     </div>
     <div class="section-label">KPI OVERVIEW</div>
     <div class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-label">Recensioni con testo</div>
-        <div class="kpi-value">2.284</div>
+        <div class="kpi-value">2.007</div>
         <div class="kpi-sub">App Store + Play Store</div>
       </div>
       <div class="kpi-card">
@@ -343,12 +413,12 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Valutazione recensioni con testo</div>
-        <div class="kpi-value blue">3,16 ★</div>
-        <div class="kpi-sub">Base: <strong>2.284</strong> recensioni scritte</div>
+        <div class="kpi-value blue">3,52 ★</div>
+        <div class="kpi-sub">Base: <strong>2.007</strong> recensioni scritte</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Recensioni negative (1-2★)</div>
-        <div class="kpi-value red">40,0%</div>
+        <div class="kpi-value red">33,0%</div>
         <div class="kpi-sub"><strong>913</strong> recensioni · positive 4-5★: <strong>54,3%</strong></div>
       </div>
     </div>
@@ -366,8 +436,8 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
       </div>
       <div class="cmp-card written">
         <div class="cmp-lbl">Valutazione recensioni con testo<br>(base analizzata)</div>
-        <div class="cmp-val" style="color:var(--blue)">3,16 ★</div>
-        <div class="cmp-base">Base: <strong>2.284</strong> recensioni scritte</div>
+        <div class="cmp-val" style="color:var(--blue)">3,52 ★</div>
+        <div class="cmp-base">Base: <strong>2.007</strong> recensioni scritte</div>
       </div>
       <div class="cmp-card gap">
         <div class="cmp-lbl">Scostamento<br>(totale − con testo)</div>
@@ -392,7 +462,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
     </div>
     <div id="totalsTodo"></div>
     <div class="note">
-      <div class="note-text"><strong>Come leggere lo scostamento.</strong> Chi si limita a mettere le stelline senza scrivere nulla è in larga maggioranza un utente soddisfatto: scrivere una recensione richiede uno sforzo che di norma viene sostenuto da chi ha un problema da segnalare. Ne consegue che la valutazione totale dello store è strutturalmente più alta di quella delle recensioni con testo, e che <strong>lo scostamento non è un errore di misura ma il costo nascosto</strong>: il voto pubblico più alto convive con un nucleo di utenti scritti fortemente critico, di cui questo report ricostruisce le cause.</div>
+      <div class="note-text"><strong>Come leggere lo scostamento.</strong> Chi si limita a mettere le stelline senza scrivere nulla è in larga maggioranza un utente soddisfatto: scrivere una recensione richiede uno sforzo che di norma viene sostenuto da chi ha un problema da segnalare. Ne consegue che la valutazione totale dello store è strutturalmente più alta di quella delle recensioni con testo — <strong>+1,03</strong> complessivi, con un divario più marcato su Apple (+1,33) che su Android (+0,94) — e che <strong>lo scostamento non è un errore di misura ma il costo nascosto</strong>: il voto pubblico più alto convive con un nucleo di utenti scritti fortemente critico, appena l'<strong>8,9%</strong> delle 22.642 valutazioni complessive, di cui questo report ricostruisce le cause.</div>
     </div>
   </div>
 
@@ -405,38 +475,38 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
         <div class="card-title">Distribuzione Stelle</div>
         <div class="star-row">
           <div class="star-label">5★</div>
-          <div class="star-count">1.008</div>
-          <div class="bar-wrap"><div class="bar-fill bar-5" style="width:44.1%"></div></div>
-          <div class="star-pct">44,1%</div>
+          <div class="star-count">992</div>
+          <div class="bar-wrap"><div class="bar-fill bar-5" style="width:49.4%"></div></div>
+          <div class="star-pct">49,4%</div>
         </div>
         <div class="star-row">
           <div class="star-label">4★</div>
-          <div class="star-count">232</div>
-          <div class="bar-wrap"><div class="bar-fill bar-4" style="width:10.2%"></div></div>
-          <div class="star-pct">10,2%</div>
+          <div class="star-count">228</div>
+          <div class="bar-wrap"><div class="bar-fill bar-4" style="width:11.4%"></div></div>
+          <div class="star-pct">11,4%</div>
         </div>
         <div class="star-row">
           <div class="star-label">3★</div>
-          <div class="star-count">131</div>
-          <div class="bar-wrap"><div class="bar-fill bar-3" style="width:5.7%"></div></div>
-          <div class="star-pct">5,7%</div>
+          <div class="star-count">125</div>
+          <div class="bar-wrap"><div class="bar-fill bar-3" style="width:6.2%"></div></div>
+          <div class="star-pct">6,2%</div>
         </div>
         <div class="star-row">
           <div class="star-label">2★</div>
-          <div class="star-count">157</div>
-          <div class="bar-wrap"><div class="bar-fill bar-2" style="width:6.9%"></div></div>
-          <div class="star-pct">6,9%</div>
+          <div class="star-count">147</div>
+          <div class="bar-wrap"><div class="bar-fill bar-2" style="width:7.3%"></div></div>
+          <div class="star-pct">7,3%</div>
         </div>
         <div class="star-row">
           <div class="star-label">1★</div>
-          <div class="star-count">756</div>
-          <div class="bar-wrap"><div class="bar-fill bar-1" style="width:33.1%"></div></div>
-          <div class="star-pct">33,1%</div>
+          <div class="star-count">515</div>
+          <div class="bar-wrap"><div class="bar-fill bar-1" style="width:25.7%"></div></div>
+          <div class="star-pct">25,7%</div>
         </div>
         <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f0f0f0;display:flex;gap:22px;flex-wrap:wrap;">
-          <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positive 4-5★ <strong style="color:var(--dark);margin-left:2px">54,3%</strong></div>
-          <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutre 3★ <strong style="color:var(--dark);margin-left:2px">5,7%</strong></div>
-          <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negative 1-2★ <strong style="color:var(--dark);margin-left:2px">40,0%</strong></div>
+          <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positive 4-5★ <strong style="color:var(--dark);margin-left:2px">60,8%</strong></div>
+          <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutre 3★ <strong style="color:var(--dark);margin-left:2px">6,2%</strong></div>
+          <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negative 1-2★ <strong style="color:var(--dark);margin-left:2px">33,0%</strong></div>
         </div>
       </div>
       <div class="card">
@@ -444,14 +514,14 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
         <div class="store-row">
           <div>
             <div class="store-name">Google Play Store</div>
-            <div class="store-detail">1.757 recensioni · 76,9% del totale</div>
+            <div class="store-detail">1.652 recensioni · 82,3% del totale</div>
           </div>
           <div class="store-badge badge-ps">★ 3,44</div>
         </div>
         <div class="store-row">
           <div>
             <div class="store-name">Apple App Store</div>
-            <div class="store-detail">527 recensioni · 23,1% del totale</div>
+            <div class="store-detail">355 recensioni · 17,7% del totale</div>
           </div>
           <div class="store-badge badge-as">★ 2,22</div>
         </div>
@@ -464,16 +534,16 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
             <div class="sent-nd" style="flex:5"></div>
           </div>
           <div class="sent-legend">
-            <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positivo 43,5% <span style="color:#aaa">(≈994)</span></div>
-            <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutro 11,5% <span style="color:#aaa">(≈263)</span></div>
-            <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negativo 40,0% <span style="color:#aaa">(≈914)</span></div>
+            <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positivo 53,3% <span style="color:#aaa">(1.070)</span></div>
+            <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutro 9,0% <span style="color:#aaa">(181)</span></div>
+            <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negativo 33,9% <span style="color:#aaa">(681)</span></div>
             <div class="sent-item"><span class="dot" style="background:#D5D7DA"></span>Non interpretabile 5,0% <span style="color:#aaa">(≈114)</span></div>
           </div>
         </div>
       </div>
     </div>
     <div class="note" style="margin-top:16px;margin-bottom:0;">
-      <div class="note-text"><strong>Il sentiment non copre il 100% della base.</strong> Le tre classi valgono complessivamente il <strong>95,0%</strong> (43,5 + 11,5 + 40,0): il <strong>5,0% residuo</strong>, circa <strong>114 recensioni</strong>, non è classificabile in modo affidabile — testi troppo brevi o generici ("ok", "boh", sole emoji), recensioni in lingua diversa dall'italiano, contenuti ambigui o fuori tema. Queste recensioni sono escluse dal solo calcolo del sentiment, ma restano incluse nelle 2.284 della base e nella distribuzione stelle: per questo la somma delle tre classi non arriva a 100 e le due letture non sono sovrapponibili.</div>
+      <div class="note-text"><strong>Il sentiment non copre il 100% della base.</strong> Le tre classi valgono complessivamente il <strong>96,2%</strong> (53,3 + 9,0 + 33,9): il <strong>3,8% residuo</strong>, pari a <strong>75 recensioni</strong>, non è classificabile in modo affidabile — testi troppo brevi o generici ("ok", "Ciao", sole emoji), stringhe prive di senso compiuto, contenuti ambigui o fuori tema. Queste recensioni sono escluse dal solo calcolo del sentiment, ma restano incluse nelle 2.007 della base e nella distribuzione stelle: per questo la somma delle tre classi non arriva a 100 e le due letture non sono sovrapponibili.</div>
     </div>
   </div>
 
@@ -487,7 +557,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
         <canvas id="trendChart"></canvas>
       </div>
       <div style="font-size:11px;color:var(--mid);line-height:1.6;margin-top:14px;padding-top:12px;border-top:1px solid #f0f0f0;">
-        Serie costruita sulle <strong>988 recensioni</strong> con data attribuibile al mese. Il rating medio di questo sottoinsieme (★ 4,01) è più alto di quello dell'intera base con testo (★ 3,16): il trend va quindi letto come <strong>andamento relativo nel tempo</strong>, non come livello assoluto.
+        Serie costruita sulle <strong>964 recensioni</strong> pubblicate nella finestra maggio 2023 — marzo 2026, tutte con data certa. Il rating medio di questo sottoinsieme (★ 4,04) è più alto di quello dell'intera base con testo (★ 3,52), che comprende anche lo storico precedente: il trend va quindi letto come <strong>andamento relativo nel tempo</strong>, non come livello assoluto.
       </div>
     </div>
   </div>
@@ -499,22 +569,22 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
     <div class="focus-grid">
       <div class="kpi-card">
         <div class="kpi-label">Recensioni ultimi 12 mesi</div>
-        <div class="kpi-value">336</div>
+        <div class="kpi-value">330</div>
         <div class="kpi-sub">34,0% del volume datato complessivo</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Rating medio 12 mesi</div>
-        <div class="kpi-value blue">3,87 ★</div>
+        <div class="kpi-value blue">3,89 ★</div>
         <div class="kpi-sub">Media ponderata sui volumi mensili</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">vs 12 mesi precedenti</div>
-        <div class="kpi-value">3,92 ★</div>
+        <div class="kpi-value">3,96 ★</div>
         <div class="delta-pill delta-down">▼ −0,05 punti</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Ultimo semestre</div>
-        <div class="kpi-value red">3,74 ★</div>
+        <div class="kpi-value red">3,75 ★</div>
         <div class="delta-pill delta-down">▼ −0,23 vs semestre prec.</div>
       </div>
     </div>
@@ -537,7 +607,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
       </div>
     </div>
     <div class="note" style="margin-top:16px;margin-bottom:0;">
-      <div class="note-text">Tutti i valori di questa sezione sono calcolati sulle <strong>988 recensioni datate</strong> (base della serie mensile), non sull'intera base di 2.284. Le medie di periodo sono <strong>ponderate per il numero di recensioni di ciascun mese</strong>. I confronti usano finestre omogenee di 12 e 6 mesi.</div>
+      <div class="note-text">Tutti i valori di questa sezione sono calcolati sulle <strong>964 recensioni della finestra maggio 2023 — marzo 2026</strong>, non sull'intera base di 2.007. Le medie di periodo sono <strong>ponderate per il numero di recensioni di ciascun mese</strong>. I confronti usano finestre omogenee di 12 e 6 mesi.</div>
     </div>
   </div>
 
@@ -564,7 +634,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
     <span class="section-anchor" id="frizioni"></span>
     <div class="section-label">FRIZIONI & SERVIZI — ANALISI QUALITATIVA</div>
     <div style="margin-bottom:18px;font-size:13px;color:var(--mid);line-height:1.6;">
-      Analisi condotta su <strong style="color:var(--dark)" id="criticalBase">2.284</strong> recensioni con testo. Ogni area è classificata per frequenza, rating medio e percentuale di valutazioni negative, con esempi estratti direttamente dalle recensioni. Usa il filtro per isolare le criticità di un singolo store.
+      Analisi condotta su <strong style="color:var(--dark)" id="criticalBase">2.007</strong> recensioni con testo. Ogni area è classificata per frequenza, rating medio e percentuale di valutazioni negative, con esempi estratti direttamente dalle recensioni. Usa il filtro per isolare le criticità di un singolo store.
     </div>
 
     <!-- Filtro store -->
@@ -614,7 +684,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-brand">Elaborato da <strong>MOCA Interactive</strong> · mocainteractive.com</div>
-    <div class="footer-date">Periodo maggio 2023 — marzo 2026 · dati estratti il 24 marzo 2026</div>
+    <div class="footer-date">Periodo maggio 2023 — 24 marzo 2026 · dati estratti il 4 agosto 2026</div>
   </div>
 
 </div><!-- /page -->
@@ -623,141 +693,434 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
 /* ══════════════════════════════════════════════════════════════════
    CONFIGURAZIONE — DATI ESTERNI DA COMPLETARE
    ──────────────────────────────────────────────────────────────────
-   1) STORE_TOTALS — valutazione "totale" pubblicata sulla scheda dello
-      store, quella che comprende anche le valutazioni con sole stelline.
-      NON è ricavabile dal set di recensioni analizzato: va letta dalla
-      scheda dello store (o da uno scraper) e inserita qui.
+   1) STORE_TOTALS — [COMPLETATO il 4 agosto 2026]
+      Valutazione "totale" pubblicata sulla scheda dello store, quella che
+      comprende anche le valutazioni con sole stelline. NON è ricavabile dal
+      set di recensioni analizzato: va letta dalla scheda dello store.
          rating → voto medio mostrato dallo store   (es. 4.1)
          count  → numero totale di valutazioni      (es. 18500)
       Schede di riferimento:
          Android → https://play.google.com/store/apps/details?id=it.vittoria.assicurazioni&hl=it
          Apple   → https://apps.apple.com/it/app/myvittoria/id444690713
-      Finché i valori sono null il report mostra "—" con un avviso
-      esplicito, senza inventare numeri.
+      Valori rilevati: Android 4,50 ★ su 13.086 valutazioni · Apple 4,63 ★ su
+      9.556 valutazioni. Per aggiornarli basta rileggere le due schede e
+      riscrivere STORE_TOTALS e STORE_TOTALS_DATE: KPI, scostamento e tabella
+      si ricalcolano da soli. Se i valori tornano a null il report mostra "—"
+      con un avviso esplicito, senza inventare numeri.
 
-   2) STORE_SPLIT — scomposizione per store di aree tematiche e frizioni,
-      necessaria al filtro Apple / Android della sezione criticità.
-      Struttura attesa (le chiavi devono corrispondere esattamente al
-      campo `name` di `topics` e `frictions`):
-         STORE_SPLIT = {
-           topics: {
-             'Pagamento Polizza': {
-               android: {count:300, avg:2.80, neg:50.1},
-               apple:   {count:107, avg:2.30, neg:60.4}
-             }, ...
-           },
-           frictions: {
-             'App si blocca al login': {
-               android: {count:70, avg:1.70, neg:80.0},
-               apple:   {count:27, avg:1.40, neg:88.9}
-             }, ...
-           }
-         }
-      Finché è null, selezionando un singolo store il report mostra un
-      pannello esplicativo invece di numeri aggregati, che verrebbero
-      letti erroneamente come dati di quello store.
+   2) STORE_SPLIT — [COMPLETATO il 4 agosto 2026]
+      Scomposizione per store di aree tematiche e frizioni, che alimenta il
+      filtro Apple / Android della sezione criticità. Ricavata riclassificando
+      da zero le recensioni dei due store con il campo store conservato, quindi
+      i valori "Tutti gli store" e quelli per singolo store provengono dalla
+      stessa classificazione e sono coerenti fra loro.
+      Struttura: per ogni nome di `topics` / `frictions`, una voce android e/o
+      apple con {count, avg, neg}. Se una chiave manca per uno store, quella
+      vista mostra il pannello esplicativo invece di numeri aggregati.
 ══════════════════════════════════════════════════════════════════ */
+/* Valutazione totale delle schede store — rilevata il 4 agosto 2026 (storefront IT).
+   Fonte: scraping delle schede pubbliche dei due store.
+   Attenzione: è una fotografia alla data di rilevazione, successiva alla chiusura
+   del set di recensioni analizzato (24 marzo 2026). Le due date sono volutamente
+   distinte e vengono dichiarate in chiaro nel report. */
 const STORE_TOTALS = {
-  android: { rating: null, count: null },   // Google Play Store
-  apple:   { rating: null, count: null }    // Apple App Store
+  android: { rating: 4.50, count: 13086 },  // Google Play Store — istogramma 1★:501 2★:261 3★:606 4★:2478 5★:9235
+  apple:   { rating: 4.63, count: 9556 }    // Apple App Store
 };
+const STORE_TOTALS_DATE = '4 agosto 2026';
 
-const STORE_SPLIT = null;
+const STORE_SPLIT = {
+  topics: {
+    "Pagamento Polizza": {
+      android: {
+        count: 108,
+        avg: 2.74,
+        neg: 50.9
+      },
+      apple: {
+        count: 37,
+        avg: 2.92,
+        neg: 45.9
+      }
+    },
+    "Crash & Bug Tecnici": {
+      android: {
+        count: 204,
+        avg: 1.68,
+        neg: 79.9
+      },
+      apple: {
+        count: 58,
+        avg: 1.81,
+        neg: 74.1
+      }
+    },
+    "Login & Accesso": {
+      android: {
+        count: 287,
+        avg: 1.76,
+        neg: 77.7
+      },
+      apple: {
+        count: 62,
+        avg: 1.85,
+        neg: 75.8
+      }
+    },
+    "Documenti": {
+      android: {
+        count: 82,
+        avg: 2.57,
+        neg: 61.0
+      },
+      apple: {
+        count: 20,
+        avg: 2.9,
+        neg: 45.0
+      }
+    },
+    "UX & Navigazione": {
+      android: {
+        count: 287,
+        avg: 4.16,
+        neg: 15.3
+      },
+      apple: {
+        count: 82,
+        avg: 4.35,
+        neg: 11.0
+      }
+    },
+    "Servizio Clienti": {
+      android: {
+        count: 202,
+        avg: 4.15,
+        neg: 18.3
+      },
+      apple: {
+        count: 59,
+        avg: 4.07,
+        neg: 22.0
+      }
+    },
+    "Aggiornamenti App": {
+      android: {
+        count: 88,
+        avg: 2.15,
+        neg: 65.9
+      },
+      apple: {
+        count: 50,
+        avg: 2.54,
+        neg: 56.0
+      }
+    },
+    "Notifiche & Scadenze": {
+      android: {
+        count: 74,
+        avg: 3.0,
+        neg: 45.9
+      },
+      apple: {
+        count: 24,
+        avg: 3.25,
+        neg: 37.5
+      }
+    },
+    "Sinistri": {
+      android: {
+        count: 24,
+        avg: 2.5,
+        neg: 62.5
+      },
+      apple: {
+        count: 15,
+        avg: 2.53,
+        neg: 60.0
+      }
+    },
+    "SPID / CIE": {
+      android: {
+        count: 16,
+        avg: 2.06,
+        neg: 68.8
+      },
+      apple: {
+        count: 3,
+        avg: 1.33,
+        neg: 100.0
+      }
+    }
+  },
+  frictions: {
+    "Password/OTP richiesti a ogni accesso": {
+      android: {
+        count: 129,
+        avg: 1.92,
+        neg: 72.1
+      },
+      apple: {
+        count: 19,
+        avg: 1.74,
+        neg: 84.2
+      }
+    },
+    "Consenso obbligatorio per proseguire": {
+      android: {
+        count: 16,
+        avg: 1.44,
+        neg: 87.5
+      },
+      apple: {
+        count: 6,
+        avg: 2.17,
+        neg: 66.7
+      }
+    },
+    "App si blocca al login": {
+      android: {
+        count: 153,
+        avg: 1.29,
+        neg: 92.2
+      },
+      apple: {
+        count: 32,
+        avg: 1.44,
+        neg: 90.6
+      }
+    },
+    "Pagamento polizza non funziona": {
+      android: {
+        count: 50,
+        avg: 1.74,
+        neg: 84.0
+      },
+      apple: {
+        count: 16,
+        avg: 1.38,
+        neg: 87.5
+      }
+    },
+    "Download documenti fallisce": {
+      android: {
+        count: 33,
+        avg: 1.85,
+        neg: 81.8
+      },
+      apple: {
+        count: 6,
+        avg: 2.0,
+        neg: 66.7
+      }
+    },
+    "App lenta / caricamento bloccato": {
+      android: {
+        count: 61,
+        avg: 1.69,
+        neg: 78.7
+      },
+      apple: {
+        count: 11,
+        avg: 1.91,
+        neg: 72.7
+      }
+    },
+    "Crash e bug tecnici ricorrenti": {
+      android: {
+        count: 30,
+        avg: 1.67,
+        neg: 80.0
+      },
+      apple: {
+        count: 11,
+        avg: 1.82,
+        neg: 72.7
+      }
+    },
+    "Nessuna risposta dall'assistenza": {
+      android: {
+        count: 15,
+        avg: 1.53,
+        neg: 86.7
+      },
+      apple: {
+        count: 6,
+        avg: 1.17,
+        neg: 100.0
+      }
+    },
+    "Sinistro non gestito correttamente": {
+      android: {
+        count: 6,
+        avg: 1.17,
+        neg: 100.0
+      },
+      apple: {
+        count: 3,
+        avg: 1.0,
+        neg: 100.0
+      }
+    },
+    "SPID problematico / obbligatorio": {
+      android: {
+        count: 13,
+        avg: 1.77,
+        neg: 76.9
+      },
+      apple: {
+        count: 3,
+        avg: 1.33,
+        neg: 100.0
+      }
+    }
+  }
+};
 
 /* Anagrafica store — dati delle sole recensioni CON TESTO (fonte: questo report) */
 const storeMeta = {
-  all:     { label:'Tutti gli store',   short:'Tutti gli store', written:2284, avgWritten:3.16 },
-  android: { label:'Google Play Store', short:'Android',         written:1757, avgWritten:3.44 },
-  apple:   { label:'Apple App Store',   short:'Apple',           written:527,  avgWritten:2.22 }
+  all:     { label:'Tutti gli store',   short:'Tutti gli store', written:2007, avgWritten:3.52 },
+  android: { label:'Google Play Store', short:'Android',         written:1652, avgWritten:3.56 },
+  apple:   { label:'Apple App Store',   short:'Apple',           written:355,  avgWritten:3.30 }
 };
 
 /* ──────────────────────────────────────────
    DATI
 ────────────────────────────────────────── */
 const trendData = [
-  {date:'2023-05',avg:4.6,count:44},{date:'2023-06',avg:4.5,count:37},{date:'2023-07',avg:4.4,count:27},
-  {date:'2023-08',avg:4.2,count:32},{date:'2023-09',avg:4.0,count:27},{date:'2023-10',avg:3.6,count:27},
-  {date:'2023-11',avg:4.5,count:30},{date:'2023-12',avg:4.2,count:32},
-  {date:'2024-01',avg:4.4,count:25},{date:'2024-02',avg:4.1,count:40},{date:'2024-03',avg:3.8,count:29},
-  {date:'2024-04',avg:3.8,count:35},{date:'2024-05',avg:3.9,count:24},{date:'2024-06',avg:4.0,count:25},
-  {date:'2024-07',avg:4.0,count:32},{date:'2024-08',avg:3.6,count:20},{date:'2024-09',avg:3.6,count:28},
-  {date:'2024-10',avg:4.0,count:20},{date:'2024-11',avg:3.7,count:22},{date:'2024-12',avg:4.6,count:20},
-  {date:'2025-01',avg:3.7,count:22},{date:'2025-02',avg:3.9,count:25},{date:'2025-03',avg:4.3,count:29},
-  {date:'2025-04',avg:4.1,count:34},{date:'2025-05',avg:4.2,count:40},{date:'2025-06',avg:3.6,count:18},
-  {date:'2025-07',avg:4.4,count:16},{date:'2025-08',avg:3.8,count:49},{date:'2025-09',avg:3.8,count:31},
-  {date:'2025-10',avg:4.2,count:26},{date:'2025-11',avg:3.8,count:23},{date:'2025-12',avg:4.1,count:26},
-  {date:'2026-01',avg:3.5,count:33},{date:'2026-02',avg:3.4,count:26},{date:'2026-03',avg:3.3,count:14}
+  {date:'2023-05',avg:4.6,count:43},
+  {date:'2023-06',avg:4.5,count:35},
+  {date:'2023-07',avg:4.4,count:27},
+  {date:'2023-08',avg:4.2,count:32},
+  {date:'2023-09',avg:4.0,count:26},
+  {date:'2023-10',avg:3.6,count:26},
+  {date:'2023-11',avg:4.5,count:29},
+  {date:'2023-12',avg:4.2,count:32},
+  {date:'2024-01',avg:4.4,count:25},
+  {date:'2024-02',avg:4.1,count:40},
+  {date:'2024-03',avg:4.0,count:25},
+  {date:'2024-04',avg:3.8,count:34},
+  {date:'2024-05',avg:3.9,count:25},
+  {date:'2024-06',avg:4.0,count:25},
+  {date:'2024-07',avg:4.0,count:32},
+  {date:'2024-08',avg:3.8,count:18},
+  {date:'2024-09',avg:3.8,count:26},
+  {date:'2024-10',avg:4.1,count:18},
+  {date:'2024-11',avg:3.7,count:22},
+  {date:'2024-12',avg:4.5,count:20},
+  {date:'2025-01',avg:3.7,count:22},
+  {date:'2025-02',avg:3.9,count:25},
+  {date:'2025-03',avg:4.4,count:27},
+  {date:'2025-04',avg:4.2,count:33},
+  {date:'2025-05',avg:4.2,count:40},
+  {date:'2025-06',avg:3.6,count:17},
+  {date:'2025-07',avg:4.4,count:15},
+  {date:'2025-08',avg:3.8,count:48},
+  {date:'2025-09',avg:3.9,count:29},
+  {date:'2025-10',avg:4.2,count:26},
+  {date:'2025-11',avg:3.9,count:22},
+  {date:'2025-12',avg:4.2,count:24},
+  {date:'2026-01',avg:3.5,count:32},
+  {date:'2026-02',avg:3.2,count:23},
+  {date:'2026-03',avg:3.5,count:21},
 ];
 
 const strengths = [
-  {title:"Usabilità dell'app",desc:"L'app è considerata molto intuitiva e facile da usare, accessibile a un'ampia gamma di utenti.",quotes:["app. semplice, intuitiva e funzionale.","Applicazione molto semplice e intuitiva.","Comoda e intuitiva"]},
-  {title:"Soddisfazione Generale",desc:"Alto livello di soddisfazione, con utenti che sottolineano efficienza e convenienza e la consigliano attivamente.",quotes:["Pratica ed efficiente, voto 10 !!!","Molto soddisfatto, la consiglio a tutti"]},
-  {title:"Servizio Clienti",desc:"Il servizio clienti è apprezzato per disponibilità e professionalità, in particolare nelle filiali fisiche.",quotes:["Ottimo servizio clienti","Assicuratori gentilissimi e disponibili per ogni chiarimento"]},
-  {title:"Qualità del Servizio",desc:"La qualità complessiva del servizio è considerata eccellente, con personale competente e preparato.",quotes:["Molto competenti. Cercano sempre la migliore soluzione per il cliente.","Ottimo servizio e assistenza costante"]},
-  {title:"Funzionalità",desc:"L'app offre funzionalità utili che semplificano la gestione di scadenze, documenti e polizze.",quotes:["App completa e semplice da usare","Utile per scadenze e pagamenti"]}
+  {title:"Usabilità dell'app",desc:"UX & Navigazione è il tema più citato del report (369 menzioni) con rating 4,21 e solo il 14,4% di valutazioni negative: per la maggioranza di chi scrive l'app è intuitiva e accessibile.",quotes:["app. semplice, intuitiva e funzionale.","Applicazione molto semplice e intuitiva.","Comoda e intuitiva"]},
+  {title:"Servizio Clienti e rete di agenzia",desc:"261 menzioni con rating 4,13. Gli agenti di filiale sono citati per nome e con gratitudine: è il punto di forza più umano e meno replicabile dai concorrenti.",quotes:["Assicuratori gentilissimi e disponibili per ogni chiarimento","Molto competenti. Cercano sempre la migliore soluzione per il cliente.","Ottimo servizio e assistenza costante"]},
+  {title:"Polizze e documenti a portata di mano",desc:"La consultazione di contratti, coperture e certificati è il caso d'uso che genera più soddisfazione quando funziona, soprattutto per chi è lontano dall'agenzia.",quotes:["app utilissima per avere le coperture assicurative e tutti i relativi documenti in tempo reale","Completa. Facile da usare. Tutti i rapporti contrattuali sono completamente consultabili."]},
+  {title:"Promemoria e alert",desc:"Notifiche di scadenza e allerta grandine sono citate spontaneamente come valore aggiunto: un presidio di fidelizzazione che oggi funziona.",quotes:["ottima app fatta bene e di grande utilita con i promemoria delle scadenze","Ottimo l'attivazione degli alert che ti avvisano in caso di grandine."]},
+  {title:"Pagamento in-app, quando c'è",desc:"Dove il pagamento della polizza è disponibile viene indicato come il motivo principale per usare l'app invece di andare in agenzia.",quotes:["Ottima app per gestire le proprie coperture, pagare, sospendere e riattivare in autonomia le polizze.","Mi ha dato la possibilità di pagare il rinnovo direttamente in applicazione"]}
 ];
 
 const weaknesses = [
-  {title:"Problemi di Accesso",desc:"Difficoltà croniche di login: password richiesta ad ogni apertura, blocchi account, SPID obbligatorio ma spesso non funzionante.",quotes:["Per entrare devi sputare sangue.....","Sempre problemi con l'accesso."]},
-  {title:"Problemi Tecnici",desc:"Frequenti malfunzionamenti e bug rendono l'app poco affidabile, specialmente nei momenti critici come i pagamenti.",quotes:["App terribile. Da un'ora sto cercando di pagare ma non funziona.","Ha sempre qualcosa che non funziona"]},
-  {title:"Bug e Malfunzionamenti",desc:"Bug ricorrenti che compromettono l'esperienza d'uso. Ogni aggiornamento introduce nuovi problemi.",quotes:["Non si apre più l'applicazione.","Continuamente devo reinstallarla"]},
-  {title:"Aggiornamenti Problematici",desc:"Gli aggiornamenti sono percepiti come fonte di nuovi bug. Il ciclo di rilascio non è accompagnato da adeguato QA.",quotes:["Ad ogni aggiornamento si porta nuovi problemi"]},
-  {title:"Utilità Percepita",desc:"Una parte degli utenti trova l'app poco utile rispetto alle aspettative, con funzionalità core non operative.",quotes:["Non riesco a fare nulla con questa app"]}
+  {title:"Problemi di Accesso",desc:"Difficoltà croniche di login: password richiesta ad ogni apertura, blocchi account, biometria che non viene memorizzata, SPID spesso non funzionante. 349 menzioni con rating 1,77 e il 77,4% di negatività.",quotes:["Per entrare devi sputare sangue.....","Sempre problemi con l'accesso."]},
+  {title:"Problemi Tecnici",desc:"Frequenti malfunzionamenti rendono l'app poco affidabile, specialmente nei momenti critici come i pagamenti: 262 menzioni con rating 1,71, il più basso del report.",quotes:["App terribile. Da un'ora sto cercando di pagare ma non funziona.","Ha sempre qualcosa che non funziona"]},
+  {title:"Aggiornamenti Problematici",desc:"Gli aggiornamenti sono percepiti come fonte di nuovi bug: 138 menzioni con rating 2,29 e il 62,3% di negatività. Il ciclo di rilascio non è accompagnato da adeguato QA.",quotes:["Ad ogni aggiornamento si porta nuovi problemi","Dopo l'aggiornamento non si apre più. Ho provato a disinstallare e reinstallare senza alcun risultato"]},
+  {title:"Pagamento non sempre disponibile",desc:"Quando il pagamento in-app manca o fallisce, l'utente è costretto in agenzia e la promessa dell'app si rovescia: 66 menzioni specifiche con rating 1,65 e l'84,8% di negatività.",quotes:["non funziona mai il pagamento online","una volta era perfetta, ti permetteva di pagare la polizza senza dover andare in agenzia, ora dalla app non è più possibile"]},
+  {title:"Documenti difficili da ottenere",desc:"Download che falliscono, PDF che non si aprono e ordinamento non cronologico: il documento più cercato, l'attestato di rischio, è anche il più problematico.",quotes:["Non si scarica nulla","Errore percorso rete quando si tenta di scaricare qualsiasi documento."]}
 ];
 
 const topics = [
-  {name:'Pagamento Polizza',count:407,avg:2.67,neg:52.8,priority:'critical',
-   desc:'Il topic più menzionato. Oltre la metà delle review negative riguarda l\'impossibilità di pagare la polizza tramite app, errori durante il checkout e mancanza di metodi di pagamento moderni.',
-   quotes:[{r:1,t:'Pessima, sto cercando di pagare e continuo a ricevere errore. Non credo esista un\'app assicurativa peggiore.'},{r:1,t:'Da quando esiste questa applicazione non è mai stato possibile pagare la propria polizza. Siamo nel 2024 e anche il gelato si paga con il pos!'},{r:1,t:'Consenso ai fini di marketing impossibile da disattivare se si vuole usare l\'app. Obbligatorio per procedere al pagamento.'},{r:5,t:'Ottima app per gestire le proprie coperture, pagare, sospendere e riattivare in autonomia le polizze.'}]},
-  {name:'Crash & Bug Tecnici',count:345,avg:1.87,neg:74.5,priority:'critical',
-   desc:'Crash, blocchi e bug tecnici ricorrenti. L\'app si blocca al caricamento, perde le credenziali dopo un aggiornamento e smette di funzionare in modo imprevedibile.',
-   quotes:[{r:2,t:'Il sistema di autenticazione va spesso in errore. App spesso non funziona e perde le credenziali.'},{r:1,t:'Dopo l\'aggiornamento non è cambiato niente. Errore percorso rete quando si tenta di scaricare qualsiasi documento.'},{r:1,t:'Ha sempre qualcosa che non funziona. Continuamente devo reinstallarla per farla partire.'}]},
-  {name:'Login & Accesso',count:284,avg:2.17,neg:66.5,priority:'critical',
-   desc:'Problemi cronici di login: password richiesta ad ogni apertura, blocchi improvvisi dell\'account, SPID obbligatorio ma spesso non funzionante, biometria non memorizzata tra una sessione e l\'altra.',
-   quotes:[{r:1,t:'App imbarazzante: ogni tot ti chiede la password, la inserisci, dice che è sbagliata, la cambi e ti dice che è già in uso. Ma come?!'},{r:1,t:'L\'app mi dice che sono già registrata ma non ho mai fatto registrazione. Anche con SPID continua a dirmi che la mia email è già registrata.'},{r:2,t:'L\'app chiede la password ad ogni accesso e l\'autorizzazione alla profilazione ad ogni avvio.'}]},
-  {name:'Documenti',count:209,avg:2.53,neg:58.4,priority:'high',
-   desc:'Download di documenti fallisce frequentemente. I file non sono ordinati cronologicamente, i titoli non sono chiari e l\'attestato di rischio non è accessibile in modo semplice.',
-   quotes:[{r:1,t:'A distanza di anni, i documenti non seguono l\'ordine cronologico e dai titoli a volte non si comprende nemmeno cosa siano.'},{r:4,t:'Per scaricare l\'attestato dell\'assicurazione è diventato un problema, manco dovessi entrare a Fort Knox.'},{r:1,t:'Errore percorso rete quando si tenta di scaricare qualsiasi documento dalla sezione polizze.'}]},
-  {name:'UX & Navigazione',count:166,avg:3.97,neg:19.9,priority:'medium',
-   desc:'Topic ambivalente: chi valuta positivamente elogia l\'intuitività, chi valuta negativamente lamenta complessità di navigazione e scarsa organizzazione delle informazioni.',
-   quotes:[{r:5,t:'Applicazione molto semplice e intuitiva. Comoda da usare per gestire le polizze.'},{r:3,t:'Non è intuitiva come dovrebbe: troppi passaggi per fare operazioni semplici.'},{r:2,t:'A distanza di anni è sempre più complicata, poco ordinata, poco intuitiva.'}]},
-  {name:'Servizio Clienti',count:163,avg:3.21,neg:42.3,priority:'medium',
-   desc:'Feedback polarizzato: il personale in filiale è molto apprezzato, mentre il call center viene spesso criticato per mancanza di risposta e tempi di attesa lunghi.',
-   quotes:[{r:5,t:'Assicuratori gentilissimi e disponibili per ogni chiarimento. Ottima consulenza professionale.'},{r:1,t:'Il servizio clienti non risponde. Impossibile contattare qualcuno quando hai bisogno.'},{r:1,t:'Il call center, l\'agenzia e l\'ufficio sinistri scaricano la responsabilità l\'uno sull\'altro.'}]},
-  {name:'Aggiornamenti App',count:139,avg:2.22,neg:65.5,priority:'high',
-   desc:'Gli aggiornamenti sono fonte di peggioramenti: ogni nuova versione introduce nuovi bug invece di risolvere i precedenti. La gestione del ciclo di rilascio è percepita come caotica.',
-   quotes:[{r:1,t:'Ad ogni aggiornamento si porta nuovi problemi. Non riesco a capire come sia possibile peggiorare progressivamente.'},{r:1,t:'A distanza di anni: ogni volta che aggiornate l\'app si aggiunge un nuovo problema.'}]},
-  {name:'Notifiche & Scadenze',count:91,avg:2.92,neg:47.3,priority:'medium',
-   desc:'Le scadenze delle polizze scompaiono dal calendario dopo gli aggiornamenti. Le notifiche di promemoria non arrivano o non sono configurabili.',
-   quotes:[{r:1,t:'Dopo l\'aggiornamento nella sezione calendario sono sparite le scadenze delle polizze.'},{r:3,t:'L\'app non mi avvisa mai delle scadenze imminenti. Devo controllare manualmente.'}]},
-  {name:'Sinistri',count:40,avg:2.52,neg:60.0,priority:'high',
-   desc:'Topic a bassa frequenza ma altissimo impatto emotivo. Le recensioni negative riguardano tempi di attesa estenuanti, gestione della perizia e difficoltà di apertura pratica da app.',
-   quotes:[{r:1,t:'Ho aperto un sinistro a luglio per la grandine. Ancora in attesa di riparazione. Il call center non risponde, l\'agenzia scarica la responsabilità.'},{r:1,t:'Inesistente e assenti nel momento dei sinistri. Quando hai davvero bisogno non c\'è nessuno.'},{r:5,t:'Ottima filiale, personale disponibile anche nei momenti difficili di un sinistro.'}]},
-  {name:'SPID / CIE',count:43,avg:3.16,neg:44.2,priority:'medium',
-   desc:'L\'accesso tramite SPID è spesso l\'unica alternativa al login classico, ma risulta problematico. La CIE non è supportata come alternativa gratuita.',
-   quotes:[{r:1,t:'Accesso con OTP oppure SPID. Lo SPID è a pagamento ed è sostituito dalla CIE, ma qui la CIE non è supportata.'},{r:1,t:'Non si logga con SPID. Una volta loggato dopo aver attivato la biometria, all\'avvio successivo se ne dimentica.'}]},
+  {name:"UX & Navigazione",count:369,avg:4.21,neg:14.4,priority:"medium",
+   desc:"Il tema più citato in assoluto e il più positivo: chi scrive elogia semplicità e immediatezza. La minoranza critica lamenta troppi passaggi per operazioni semplici, un'organizzazione delle informazioni poco lineare e funzioni che restano solo in agenzia.",
+   quotes:[{r:5,t:"app. semplice, intuitiva e funzionale."},
+           {r:5,t:"Applicazione semplice ed intuitiva"},
+           {r:3,t:"Non ha una pagina Home che ti permette di accedere a tutto facilmente, devi cercare i servizi come una matrioska, macchinosa."},
+           {r:1,t:"A distanza di anni, tolgo ancora un'altra stella perché è sempre più complicata, poco ordinata, poco intuitiva."}]},
+  {name:"Login & Accesso",count:349,avg:1.77,neg:77.4,priority:"critical",
+   desc:"La criticità strutturale del report: password e OTP richiesti a ogni apertura, biometria che non viene memorizzata, account bloccati e procedure di recupero che non arrivano a destinazione. È il secondo tema per frequenza e il primo per impatto negativo.",
+   quotes:[{r:1,t:"per entrare devi sputare sangue..... mi domando se dovesse servire veramente in caso di incidente."},
+           {r:1,t:"App imbarazzante, ogni tot tempo ti chiede la password, la inserisci, dice che è sbagliata e ti ritrovi a doverla cambiare, vai a cambiarla e ti dice che è già in uso."},
+           {r:4,t:"per entrare nell'app per scaricare l'attestato dell'assicurazione è diventato un problema, manco dovessi entrare a Fort Knox."},
+           {r:2,t:"App spesso non funziona e perde le credenziali"}]},
+  {name:"Crash & Bug Tecnici",count:262,avg:1.71,neg:78.6,priority:"critical",
+   desc:"Il tema con il rating più basso in assoluto. L'app resta sulla rotellina di caricamento, mostra una schermata bianca o smette di aprirsi del tutto: un problema che attraversa tutta la storia dell'app e che si ripresenta a ondate.",
+   quotes:[{r:1,t:"Non si apre. C'è un cerchio che gira in eterno al centro dello schermo e basta. INSERVIBILE IN CASO DI INCIDENTE ALL'ESTERO."},
+           {r:1,t:"ha sempre qualcosa che non funziona"},
+           {r:1,t:"All'apertura l'app rimane con il circolino di attesa. Provata su tre cell diversi."},
+           {r:2,t:"il più delle volte si blocca da sola, funziona per poco, poi si blocca"}]},
+  {name:"Servizio Clienti",count:261,avg:4.13,neg:19.2,priority:"medium",
+   desc:"Feedback nettamente polarizzato: il personale di agenzia è citato per nome e con gratitudine, mentre il call center raccoglie quasi tutte le critiche per mancate risposte e rimpalli di responsabilità.",
+   quotes:[{r:5,t:"Assicuratori gentilissimi e disponibili per ogni chiarimento"},
+           {r:5,t:"Personale qualificato, vicino al cliente per ogni esigenza"},
+           {r:1,t:"non rispondono mai qualsiasi interno si digiti"},
+           {r:1,t:"purtroppo non ti agevolano minimamente, per qualsiasi richiesta è un rimpallo di numeri di telefono."}]},
+  {name:"Pagamento Polizza",count:145,avg:2.79,neg:49.7,priority:"high",
+   desc:"Tema polarizzato: quando il pagamento in-app funziona è citato come il vantaggio principale, quando non è disponibile costringe ad andare in agenzia. Ricorrenti la richiesta di PayPal e altri circuiti e la mancanza dell'importo da pagare.",
+   quotes:[{r:1,t:"Da quando è stata creata questa applicazione non è mai stato possibile pagare la propria polizza tramite l'applicazione. Siamo nel 2019 e anche il gelato si può pagare con il pos."},
+           {r:1,t:"App terribile. Da circa un'ora sto cercando di pagare la mia assicurazione ma non funziona. Patetico."},
+           {r:3,t:"Di per sé l'App è chiara ma purtroppo non permette il pagamento con PayPal-klarna-Scalapay."},
+           {r:5,t:"Mi ha dato la possibilità di pagare il rinnovo direttamente in applicazione"}]},
+  {name:"Aggiornamenti App",count:138,avg:2.29,neg:62.3,priority:"critical",
+   desc:"Gli aggiornamenti sono citati quasi sempre come causa di un malfunzionamento nuovo, non come risoluzione di uno vecchio: dopo diversi rilasci l'app non si è più aperta o ha perso l'accesso all'area riservata per giorni.",
+   quotes:[{r:1,t:"dall'ultimo aggiornamento non si apre più....."},
+           {r:2,t:"continui aggiornamenti che non migliorano niente sempre lenta"},
+           {r:1,t:"Ad ogni aggiornamento un peggioramento: nella precedente versione alcune sezioni non funzionanti."},
+           {r:4,t:"Con l'ultimo aggiornamento i documenti si aprono. Grazie"}]},
+  {name:"Documenti",count:102,avg:2.64,neg:57.8,priority:"high",
+   desc:"Il download dei PDF fallisce o produce file non apribili, l'ordinamento non è cronologico e i titoli non sono parlanti. L'attestato di rischio e il certificato di assicurazione sono i documenti citati più spesso.",
+   quotes:[{r:1,t:"A distanza di anni, i documenti non seguono l'ordine cronologico e dai titoli a volte non si comprende nemmeno cosa siano."},
+           {r:2,t:"Non si aprono i pdf e non riesco ad ottenere il certificato di assicurazione! Devo andare ogni volta in ufficio a farmelo stampare!"},
+           {r:1,t:"Da errore percorso rete quando si tenta di scaricare qualsiasi documento."},
+           {r:5,t:"app utilissima per avere le coperture assicurative e tutti i relativi documenti in tempo reale"}]},
+  {name:"Notifiche & Scadenze",count:98,avg:3.06,neg:43.9,priority:"medium",
+   desc:"I promemoria di scadenza sono uno dei motivi di apprezzamento dell'app. Le critiche riguardano l'assenza dell'importo nell'avviso, scadenze che spariscono dal calendario e notifiche che si ripresentano dopo la lettura.",
+   quotes:[{r:5,t:"ottima app fatta bene e di grande utilita con i promemoria delle scadenze"},
+           {r:1,t:"Nella sezione calendario sono sparite le scadenze delle polizze, prima invece le vedevo anche a mesi di distanza."},
+           {r:1,t:"a cosa serve una app che segnala solo che non hai pagato senza dire quanto pagare?"}]},
+  {name:"Sinistri",count:39,avg:2.51,neg:61.5,priority:"high",
+   desc:"Bassa frequenza, impatto altissimo: è il momento della verità per un'assicurazione ed è quello in cui il canale digitale sparisce. Le recensioni raccontano perizie ripetute, pratiche ferme per mesi e denunce da rifare in agenzia.",
+   quotes:[{r:1,t:"inesistente e assenti nel momento dei sinistri..."},
+           {r:1,t:"Ho aperto un sinistro nel mese di luglio 2023 a causa della grandine. Siamo a fine febbraio 2024 ed ancora nessuna notizia in merito alla riparazione."},
+           {r:1,t:"Ho avuto un incidente in Inghilterra e l'ho segnalato tramite l'app. Tornato in Italia mi hanno detto che la denuncia fatta con l'App non serve a nulla e che era tutto da rifare."},
+           {r:5,t:"personale gentilissimo e sempre disponibile, sempre reperibile anche nei momenti difficili di un sinistro."}]},
+  {name:"SPID / CIE",count:19,avg:1.95,neg:73.7,priority:"high",
+   desc:"L'accesso SPID è spesso l'unica alternativa al login classico ma fallisce di frequente, e la CIE non è supportata come alternativa gratuita: una richiesta esplicita e ricorrente negli ultimi due anni.",
+   quotes:[{r:1,t:"Accesso con otp oppure spid, lo spid è a pagamento ed è sostituito egregiamente dalla CIE, ma qui la CIE non sanno neppure cosa sia."},
+           {r:1,t:"L'applicazione non si logga con SPID. Una volta loggato dopo aver messo l'opzione di accesso con dati biometrici, all'avvio successivo si scorda questa opzione."},
+           {r:4,t:"dovreste prevedere l'entrata con la CIE oltre che con lo SPID"}]},
 ];
 
 const frictions = [
-  {name:'Password richiesta ad ogni accesso',count:24,avg:1.58,neg:83.3,priority:'critical'},
-  {name:'Consenso marketing forzato per accedere',count:18,avg:1.67,neg:83.3,priority:'critical'},
-  {name:'App si blocca al login',count:97,avg:1.62,neg:82.5,priority:'critical'},
-  {name:'Pagamento polizza non funziona',count:58,avg:1.83,neg:77.6,priority:'critical'},
-  {name:'Download documenti fallisce',count:44,avg:1.77,neg:79.5,priority:'critical'},
-  {name:'App lenta / caricamento bloccato',count:60,avg:1.93,neg:70.0,priority:'high'},
-  {name:'Crash e bug tecnici ricorrenti',count:345,avg:1.87,neg:74.5,priority:'high'},
-  {name:'Nessuna risposta dall\'assistenza',count:16,avg:2.00,neg:75.0,priority:'high'},
-  {name:'Sinistro non gestito correttamente',count:8,avg:1.12,neg:100.0,priority:'high'},
-  {name:'SPID problematico / obbligatorio',count:49,avg:3.02,neg:44.9,priority:'medium'},
+  {name:"App si blocca al login",count:185,avg:1.31,neg:91.9,priority:"critical"},
+  {name:"Password/OTP richiesti a ogni accesso",count:148,avg:1.90,neg:73.6,priority:"critical"},
+  {name:"App lenta / caricamento bloccato",count:72,avg:1.72,neg:77.8,priority:"critical"},
+  {name:"Pagamento polizza non funziona",count:66,avg:1.65,neg:84.8,priority:"critical"},
+  {name:"Crash e bug tecnici ricorrenti",count:41,avg:1.71,neg:78.0,priority:"high"},
+  {name:"Download documenti fallisce",count:39,avg:1.87,neg:79.5,priority:"high"},
+  {name:"Consenso obbligatorio per proseguire",count:22,avg:1.64,neg:81.8,priority:"high"},
+  {name:"Nessuna risposta dall'assistenza",count:21,avg:1.43,neg:90.5,priority:"critical"},
+  {name:"SPID problematico / obbligatorio",count:16,avg:1.69,neg:81.2,priority:"medium"},
+  {name:"Sinistro non gestito correttamente",count:9,avg:1.11,neg:100.0,priority:"high"},
 ];
 
 const insights = [
-  {accent:'red',tag:'Priorità Massima',title:'Risolvere l\'autenticazione è la singola azione con più impatto',body:'Login bloccato, password richiesta ad ogni apertura e SPID obbligatorio generano il cluster di frizioni con il rating medio più basso (1,58) e l\'83% di negatività. Un\'autenticazione stabile con biometria persistente eliminerebbe la principale causa di 1 stella.'},
-  {accent:'red',tag:'Priorità Massima',title:'Il pagamento polizza in-app non è un\'opzione: è la funzione core',body:'407 menzioni, rating 2,67. Utenti che non riescono a pagare la propria polizza dall\'app sono costretti ad andare in filiale. Questo vanifica il valore principale dello strumento digitale e genera frustrazione proporzionale all\'urgenza del pagamento.'},
-  {accent:'orange',tag:'Azione Rapida',title:'Rimuovere il consenso marketing obbligatorio per accedere all\'app',body:'18 menzioni con rating 1,67. Il consenso alla profilazione forzato per utilizzare l\'app è una non-conformità GDPR e genera recensioni esplicitamente arrabbiate. È un blocco da rimuovere immediatamente, non richiede sviluppo complesso.'},
-  {accent:'orange',tag:'Azione Rapida',title:'Stabilizzare il ciclo di rilascio: ogni update peggiora la situazione',body:'Gli aggiornamenti sono citati come fonte di nuovi bug invece di fix. Un processo di QA più rigoroso prima dei rilasci in produzione, con test di regressione su login, pagamento e download documenti, impedirebbe il deterioramento progressivo del rating.'},
-  {accent:'blue',tag:'Opportunità di Differenziazione',title:'Il servizio umano in filiale è eccellente: va amplificato nel digitale',body:'Le recensioni 5 stelle citano spesso la cortesia e disponibilità degli agenti fisici, anche in situazioni difficili come i sinistri. Integrare meglio il canale digitale con quello umano (chat con agente, prenotazione in-app) trasformerebbe un punto di forza in elemento differenziante.'},
-  {accent:'green',tag:'Quick Win',title:'Sinistri: bassa frequenza ma altissimo impatto reputazionale',body:'Solo 40 menzioni ma rating medio 2,52 con il 100% di negatività per la gestione operativa. Un sinistro è il momento di verità per un\'assicurazione. Migliorare la tracciabilità della pratica da app trasformerebbe l\'esperienza critica in un momento di fiducia.'},
+  {accent:'red',tag:'Priorità Massima',title:"Risolvere l'autenticazione è la singola azione con più impatto",body:'Login & Accesso raccoglie 349 menzioni con rating 1,77 e il 77,4% di negatività. Le due frizioni collegate sono le più citate del report: l\'app che si blocca al login (185 menzioni, rating 1,31 con il 91,9% di negatività) e password o OTP richiesti a ogni accesso (148 menzioni, rating 1,90). Un\'autenticazione stabile con biometria persistente eliminerebbe la principale causa singola di recensione da 1 stella.'},
+  {accent:'red',tag:'Priorità Massima',title:'Il pagamento polizza in-app non è un\'opzione: è la funzione core',body:'Pagamento Polizza pesa 145 menzioni con rating 2,79, ma la frizione "il pagamento non funziona" scende a 1,65 con l\'84,8% di negatività. Utenti che non riescono a pagare la propria polizza dall\'app sono costretti ad andare in filiale: questo vanifica il valore principale dello strumento digitale e genera frustrazione proporzionale all\'urgenza del pagamento. Due richieste tornano in modo sistematico: circuiti alternativi come PayPal e la visibilità dell\'importo da pagare.'},
+  {accent:'orange',tag:'Azione Rapida',title:'Sbloccare il consenso obbligatorio che impedisce accesso e pagamento',body:'22 menzioni con rating 1,64 e l\'81,8% di negatività. Il flag di presa visione dell\'informativa non si lascia selezionare o si ripresenta a ogni avvio, bloccando login e checkout: gli utenti restano fuori dall\'app pur avendo accettato. È un blocco da rimuovere subito, non richiede sviluppo complesso e libera due funzioni critiche a monte.'},
+  {accent:'orange',tag:'Azione Rapida',title:'Stabilizzare il ciclo di rilascio: ogni update peggiora la situazione',body:'Aggiornamenti App conta 138 menzioni con rating 2,29 e il 62,3% di negatività, ed è quasi sempre citato come causa di un problema nuovo invece che come fix di uno vecchio. Un processo di QA più rigoroso prima dei rilasci in produzione, con test di regressione su login, pagamento e download documenti, impedirebbe il deterioramento progressivo del rating.'},
+  {accent:'blue',tag:'Opportunità di Differenziazione',title:'Il servizio umano in filiale è eccellente: va amplificato nel digitale',body:'Servizio Clienti raccoglie 261 menzioni con rating 4,13 e solo il 19,2% di negatività, e gli agenti vengono citati per nome anche in situazioni difficili come i sinistri. Le critiche si concentrano quasi esclusivamente sul call center, dove la frizione "nessuna risposta dall\'assistenza" tocca 1,43 con il 90,5% di negatività. Integrare meglio il canale digitale con quello umano — chat con il proprio agente, prenotazione in-app — trasformerebbe un punto di forza in elemento differenziante.'},
+  {accent:'green',tag:'Quick Win',title:'Sinistri: bassa frequenza ma altissimo impatto reputazionale',body:'Solo 39 menzioni, ma rating 2,51 con il 61,5% di negatività e una frizione, "sinistro non gestito correttamente", che raccoglie il 100% di recensioni negative. Un sinistro è il momento di verità per un\'assicurazione. Rendere tracciabile lo stato della pratica dall\'app — chi la sta lavorando, a che punto è, cosa serve — trasformerebbe l\'esperienza critica in un momento di fiducia.'}
 ];
 
 /* ──────────────────────────────────────────
@@ -841,7 +1204,14 @@ function renderRatingComparison(){
   /* Avviso dati mancanti */
   const todo = document.getElementById('totalsTodo');
   if(overall){
-    todo.innerHTML = '';
+    todo.innerHTML = `<div class="note"><div class="note-text">
+      <strong>Due date di rilevazione diverse.</strong> La valutazione totale è letta dalle schede
+      pubbliche dei due store (storefront italiano) il <strong>${STORE_TOTALS_DATE}</strong> ed è una
+      fotografia a quella data: <strong>${nf(STORE_TOTALS.android.count)}</strong> valutazioni su Google Play
+      e <strong>${nf(STORE_TOTALS.apple.count)}</strong> su App Store. Le recensioni con testo analizzate nel
+      resto del report si fermano invece al <strong>24 marzo 2026</strong>. Lo scostamento va quindi letto
+      come ordine di grandezza strutturale, non come differenza calcolata sullo stesso istante.
+    </div></div>`;
   }else{
     const missing = ['android','apple'].filter(k=>!hasTotals(k)).map(k=>storeMeta[k].label).join(' e ');
     todo.innerHTML = `<div class="note todo"><div class="note-text">
