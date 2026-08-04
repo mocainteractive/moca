@@ -54,7 +54,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
 /* ── KPI GRID ── */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .kpi-card{background:var(--white);border-radius:10px;padding:20px 22px;border:1px solid #eaeaea;}
-.kpi-label{font-size:10px;color:var(--mid);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.kpi-label{font-size:10px;color:var(--mid);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;min-height:26px;line-height:1.3;}
 .kpi-value{font-size:30px;font-weight:700;color:var(--dark);line-height:1;}
 .kpi-value.red{color:var(--red);}
 .kpi-value.green{color:var(--green);}
@@ -94,6 +94,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
 .sent-pos{background:var(--green);}
 .sent-neu{background:#FFC107;}
 .sent-neg{background:var(--red);}
+.sent-nd{background:#D5D7DA;}
 .sent-legend{display:flex;gap:18px;flex-wrap:wrap;}
 .sent-item{font-size:12px;color:var(--mid);display:flex;align-items:center;gap:5px;}
 .dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
@@ -182,6 +183,47 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
 .insight-title{font-size:13px;font-weight:700;color:var(--dark);margin-bottom:7px;line-height:1.4;}
 .insight-body{font-size:12px;color:var(--mid);line-height:1.65;}
 
+/* ── PERIODO DI ANALISI ── */
+.period-band{background:var(--white);border:1px solid #eaeaea;border-radius:10px;padding:20px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.period-item{border-left:2px solid #ececec;padding-left:16px;}
+.period-item:first-child{border-left-color:var(--red);}
+.period-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);margin-bottom:7px;}
+.period-val{font-size:15px;font-weight:700;color:var(--dark);line-height:1.35;}
+.period-note{font-size:11px;color:var(--mid);margin-top:5px;line-height:1.5;}
+
+/* ── CONFRONTO VALUTAZIONI ── */
+.cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;}
+.cmp-card{background:var(--white);border-radius:10px;border:1px solid #eaeaea;border-top-width:3px;padding:22px;}
+.cmp-card.total{border-top-color:var(--green);}
+.cmp-card.written{border-top-color:var(--blue);}
+.cmp-card.gap{border-top-color:var(--orange);}
+.cmp-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);margin-bottom:12px;line-height:1.45;min-height:29px;}
+.cmp-val{font-size:34px;font-weight:700;line-height:1;}
+.cmp-base{font-size:12px;color:var(--mid);margin-top:9px;line-height:1.55;}
+.cmp-base strong{color:var(--dark);font-weight:600;}
+.pending{color:#c4c4c4;}
+.badge-todo{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--yellow-pale);color:#946400;border:1px solid #f0dca8;border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:middle;}
+.note.todo{background:var(--yellow-pale);border-color:#f0dca8;border-left-color:var(--yellow);}
+.note.todo .note-text strong{color:#7a5300;}
+
+/* ── FILTRO STORE ── */
+.store-filter{display:flex;gap:3px;background:var(--white);border:1px solid #e2e2e2;border-radius:8px;padding:3px;width:fit-content;margin-bottom:18px;flex-wrap:wrap;}
+.sf-btn{padding:8px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-radius:6px;cursor:pointer;border:none;background:transparent;color:var(--mid);font-family:var(--font);transition:all .18s;display:flex;align-items:center;gap:7px;}
+.sf-btn:hover{color:var(--dark);}
+.sf-btn.active{background:var(--dark);color:#fff;}
+.sf-n{font-size:10px;font-weight:600;opacity:.65;}
+.empty-panel{background:var(--white);border:1px dashed #d5d5d5;border-radius:10px;padding:30px 28px;}
+.empty-title{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:9px;}
+.empty-body{font-size:12px;color:var(--mid);line-height:1.7;max-width:660px;}
+.empty-kpis{display:flex;gap:34px;margin-top:22px;padding-top:20px;border-top:1px solid #f0f0f0;flex-wrap:wrap;}
+
+/* ── FOCUS ULTIMO ANNO ── */
+.focus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;}
+.delta-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px;margin-top:9px;}
+.delta-down{background:var(--red-pale);color:var(--red);}
+.delta-up{background:var(--green-pale);color:var(--green);}
+.delta-flat{background:var(--light);color:var(--mid);}
+
 /* ── FOOTER ── */
 .footer{padding:24px 48px;border-top:1px solid #e8e8e8;display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
 .footer-brand{font-size:12px;color:#aaa;}
@@ -196,13 +238,17 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
   .page-divider{margin:8px 24px 32px;}
   .footer{padding:18px 24px;}
   .kpi-grid{grid-template-columns:1fr 1fr;}
-  .two-col,.sw-grid,.insight-grid{grid-template-columns:1fr;}
+  .two-col,.sw-grid,.insight-grid,.cmp-grid{grid-template-columns:1fr;}
   .topic-grid{grid-template-columns:1fr 1fr;}
+  .period-band,.focus-grid{grid-template-columns:1fr 1fr;}
   .hero-title{font-size:24px;}
 }
 @media(max-width:480px){
   .kpi-grid{grid-template-columns:1fr 1fr;}
   .topic-grid{grid-template-columns:1fr;}
+  .period-band,.focus-grid{grid-template-columns:1fr;}
+  .store-filter{width:100%;}
+  .sf-btn{flex:1;justify-content:center;}
 }
 </style>
 </head>
@@ -216,7 +262,7 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
     </div>
     <div class="header-meta">
       <div class="label">Report</div>
-      <div class="value">Analisi Recensioni App — Marzo 2026</div>
+      <div class="value">Analisi Recensioni App · mag 2023 — mar 2026</div>
     </div>
   </div>
 
@@ -224,14 +270,44 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
   <div class="hero">
     <div class="hero-tag">Review Intelligence · Vittoria Assicurazioni</div>
     <div class="hero-title">Analisi Recensioni<br>App Store & Play Store</div>
-    <div class="hero-sub">2.284 recensioni analizzate · Aggiornato al 24 marzo 2026</div>
+    <div class="hero-sub">2.284 recensioni con testo analizzate · Periodo maggio 2023 — 24 marzo 2026</div>
     <div class="hero-nav">
       <a href="#panoramica" class="hero-nav-btn active">Panoramica</a>
+      <a href="#valutazione-totale" class="hero-nav-btn">Valutazione Totale</a>
       <a href="#distribuzione" class="hero-nav-btn">Distribuzione</a>
       <a href="#trend" class="hero-nav-btn">Trend</a>
+      <a href="#ultimo-anno" class="hero-nav-btn">Focus Ultimo Anno</a>
       <a href="#forze-debolezze" class="hero-nav-btn">Punti di Forza & Debolezze</a>
       <a href="#frizioni" class="hero-nav-btn">Frizioni & Servizi</a>
       <a href="#raccomandazioni" class="hero-nav-btn">Raccomandazioni</a>
+    </div>
+  </div>
+
+  <!-- ── PERIODO DI ANALISI ── -->
+  <div class="section">
+    <span class="section-anchor" id="periodo"></span>
+    <div class="section-label">PERIODO DI ANALISI</div>
+    <div class="period-band">
+      <div class="period-item">
+        <div class="period-lbl">Finestra osservata</div>
+        <div class="period-val">1 mag 2023 → 24 mar 2026</div>
+        <div class="period-note">35 mesi di rilevazione continuativa</div>
+      </div>
+      <div class="period-item">
+        <div class="period-lbl">Data di estrazione</div>
+        <div class="period-val">24 marzo 2026</div>
+        <div class="period-note">Recensioni pubblicate fino a questa data</div>
+      </div>
+      <div class="period-item">
+        <div class="period-lbl">Recensioni con testo</div>
+        <div class="period-val">2.284</div>
+        <div class="period-note">Base di tutte le analisi qualitative del report</div>
+      </div>
+      <div class="period-item">
+        <div class="period-lbl">Di cui datate al mese</div>
+        <div class="period-val">988</div>
+        <div class="period-note">Base delle serie mensili (trend e focus ultimo anno)</div>
+      </div>
     </div>
   </div>
 
@@ -239,30 +315,72 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
   <div class="section">
     <span class="section-anchor" id="panoramica"></span>
     <div class="note">
-      <div class="note-text">Il totale di 2.284 recensioni rappresenta il massimo dei dati pubblicamente accessibili tramite API. Il numero visibile sugli store ufficiali include migliaia di valutazioni silenziose (solo stelle, senza testo), escluse da questa analisi. I dati qui riportati si basano sull'intero set di recensioni scritte realmente disponibili.</div>
+      <div class="note-text">Esistono <strong>due letture diverse</strong> della stessa app e vanno tenute distinte. La <strong>valutazione totale</strong> è il voto che compare sulla scheda dello store: comprende anche le migliaia di valutazioni silenziose (solo stelline, senza testo) ed è tipicamente più alta. La <strong>valutazione delle recensioni con testo</strong> si basa sulle 2.284 recensioni scritte effettivamente accessibili via API: è il dato più severo, ma è l'unico che consente di capire <em>perché</em> gli utenti valutano così. Il confronto tra le due è nella sezione seguente.</div>
     </div>
     <div class="section-label">KPI OVERVIEW</div>
     <div class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-label">Totale Recensioni</div>
+        <div class="kpi-label">Recensioni con testo</div>
         <div class="kpi-value">2.284</div>
         <div class="kpi-sub">App Store + Play Store</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Rating Medio</div>
+        <div class="kpi-label">Valutazione totale store</div>
+        <div class="kpi-value green" id="kpiTotalRating">—</div>
+        <div class="kpi-sub" id="kpiTotalSub">Incluse le valutazioni con sole stelline</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Valutazione recensioni con testo</div>
         <div class="kpi-value blue">3,16 ★</div>
-        <div class="kpi-sub">Su scala da 1 a 5</div>
+        <div class="kpi-sub">Base: <strong>2.284</strong> recensioni scritte</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Sentiment Positivo</div>
-        <div class="kpi-value green">54,3%</div>
-        <div class="kpi-sub"><strong>757</strong> recensioni positive</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Sentiment Negativo</div>
+        <div class="kpi-label">Recensioni negative (1-2★)</div>
         <div class="kpi-value red">40,0%</div>
-        <div class="kpi-sub"><strong>763</strong> recensioni negative</div>
+        <div class="kpi-sub"><strong>913</strong> recensioni · positive 4-5★: <strong>54,3%</strong></div>
       </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1b: VALUTAZIONE TOTALE VS RECENSIONI CON TESTO ── -->
+  <div class="section">
+    <span class="section-anchor" id="valutazione-totale"></span>
+    <div class="section-label">VALUTAZIONE TOTALE VS RECENSIONI CON TESTO</div>
+    <div class="cmp-grid">
+      <div class="cmp-card total">
+        <div class="cmp-lbl">Valutazione totale store<br>(tutte le valutazioni)</div>
+        <div class="cmp-val" id="cmpTotalVal">—</div>
+        <div class="cmp-base" id="cmpTotalBase">Comprende le valutazioni con sole stelline</div>
+      </div>
+      <div class="cmp-card written">
+        <div class="cmp-lbl">Valutazione recensioni con testo<br>(base analizzata)</div>
+        <div class="cmp-val" style="color:var(--blue)">3,16 ★</div>
+        <div class="cmp-base">Base: <strong>2.284</strong> recensioni scritte</div>
+      </div>
+      <div class="cmp-card gap">
+        <div class="cmp-lbl">Scostamento<br>(totale − con testo)</div>
+        <div class="cmp-val" id="cmpGapVal">—</div>
+        <div class="cmp-base" id="cmpGapBase">Quanto il voto pubblico è più alto del voto delle recensioni scritte</div>
+      </div>
+    </div>
+    <div class="matrix-wrap" style="margin-bottom:16px;">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Store</th>
+            <th>Valutazione totale</th>
+            <th>N° valutazioni totali</th>
+            <th>Valutazione con testo</th>
+            <th>N° con testo</th>
+            <th>Scostamento</th>
+          </tr>
+        </thead>
+        <tbody id="cmpTableBody"></tbody>
+      </table>
+    </div>
+    <div id="totalsTodo"></div>
+    <div class="note">
+      <div class="note-text"><strong>Come leggere lo scostamento.</strong> Chi si limita a mettere le stelline senza scrivere nulla è in larga maggioranza un utente soddisfatto: scrivere una recensione richiede uno sforzo che di norma viene sostenuto da chi ha un problema da segnalare. Ne consegue che la valutazione totale dello store è strutturalmente più alta di quella delle recensioni con testo, e che <strong>lo scostamento non è un errore di misura ma il costo nascosto</strong>: il voto pubblico più alto convive con un nucleo di utenti scritti fortemente critico, di cui questo report ricostruisce le cause.</div>
     </div>
   </div>
 
@@ -303,6 +421,11 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
           <div class="bar-wrap"><div class="bar-fill bar-1" style="width:33.1%"></div></div>
           <div class="star-pct">33,1%</div>
         </div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f0f0f0;display:flex;gap:22px;flex-wrap:wrap;">
+          <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positive 4-5★ <strong style="color:var(--dark);margin-left:2px">54,3%</strong></div>
+          <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutre 3★ <strong style="color:var(--dark);margin-left:2px">5,7%</strong></div>
+          <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negative 1-2★ <strong style="color:var(--dark);margin-left:2px">40,0%</strong></div>
+        </div>
       </div>
       <div class="card">
         <div class="card-title">Confronto per Store</div>
@@ -325,15 +448,20 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
           <div class="sentiment-bars">
             <div class="sent-pos" style="flex:43.5"></div>
             <div class="sent-neu" style="flex:11.5"></div>
-            <div class="sent-neg" style="flex:45"></div>
+            <div class="sent-neg" style="flex:40"></div>
+            <div class="sent-nd" style="flex:5"></div>
           </div>
           <div class="sent-legend">
-            <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positivo 43,5%</div>
-            <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutro 11,5%</div>
-            <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negativo 40,0%</div>
+            <div class="sent-item"><span class="dot" style="background:var(--green)"></span>Positivo 43,5% <span style="color:#aaa">(≈994)</span></div>
+            <div class="sent-item"><span class="dot" style="background:#FFC107"></span>Neutro 11,5% <span style="color:#aaa">(≈263)</span></div>
+            <div class="sent-item"><span class="dot" style="background:var(--red)"></span>Negativo 40,0% <span style="color:#aaa">(≈914)</span></div>
+            <div class="sent-item"><span class="dot" style="background:#D5D7DA"></span>Non interpretabile 5,0% <span style="color:#aaa">(≈114)</span></div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="note" style="margin-top:16px;margin-bottom:0;">
+      <div class="note-text"><strong>Il sentiment non copre il 100% della base.</strong> Le tre classi valgono complessivamente il <strong>95,0%</strong> (43,5 + 11,5 + 40,0): il <strong>5,0% residuo</strong>, circa <strong>114 recensioni</strong>, non è classificabile in modo affidabile — testi troppo brevi o generici ("ok", "boh", sole emoji), recensioni in lingua diversa dall'italiano, contenuti ambigui o fuori tema. Queste recensioni sono escluse dal solo calcolo del sentiment, ma restano incluse nelle 2.284 della base e nella distribuzione stelle: per questo la somma delle tre classi non arriva a 100 e le due letture non sono sovrapponibili.</div>
     </div>
   </div>
 
@@ -342,10 +470,62 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
     <span class="section-anchor" id="trend"></span>
     <div class="section-label">TREND TEMPORALE</div>
     <div class="card">
-      <div class="card-title">Rating Medio Mensile — Ultimi 36 Mesi</div>
+      <div class="card-title">Rating Medio Mensile — maggio 2023 / marzo 2026 (35 mesi)</div>
       <div class="chart-container">
         <canvas id="trendChart"></canvas>
       </div>
+      <div style="font-size:11px;color:var(--mid);line-height:1.6;margin-top:14px;padding-top:12px;border-top:1px solid #f0f0f0;">
+        Serie costruita sulle <strong>988 recensioni</strong> con data attribuibile al mese. Il rating medio di questo sottoinsieme (★ 4,01) è più alto di quello dell'intera base con testo (★ 3,16): il trend va quindi letto come <strong>andamento relativo nel tempo</strong>, non come livello assoluto.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3b: FOCUS ULTIMO ANNO ── -->
+  <div class="section">
+    <span class="section-anchor" id="ultimo-anno"></span>
+    <div class="section-label">FOCUS ULTIMO ANNO — APRILE 2025 / MARZO 2026</div>
+    <div class="focus-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Recensioni ultimi 12 mesi</div>
+        <div class="kpi-value">336</div>
+        <div class="kpi-sub">34,0% del volume datato complessivo</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Rating medio 12 mesi</div>
+        <div class="kpi-value blue">3,87 ★</div>
+        <div class="kpi-sub">Media ponderata sui volumi mensili</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">vs 12 mesi precedenti</div>
+        <div class="kpi-value">3,92 ★</div>
+        <div class="delta-pill delta-down">▼ −0,05 punti</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Ultimo semestre</div>
+        <div class="kpi-value red">3,74 ★</div>
+        <div class="delta-pill delta-down">▼ −0,23 vs semestre prec.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Rating Medio e Volume Mensile — Ultimi 12 Mesi</div>
+      <div class="chart-container">
+        <canvas id="lastYearChart"></canvas>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-top:16px;">
+      <div class="insight-card red-accent">
+        <div class="insight-tag red">Segnale principale</div>
+        <div class="insight-title">Il deterioramento è recente e si concentra nell'ultimo trimestre</div>
+        <div class="insight-body">Sull'anno il calo è contenuto (−0,05 punti), ma la dinamica interna è netta: il semestre aprile-settembre 2025 chiude a ★ 3,97, quello successivo a ★ 3,74. Il primo trimestre 2026 scende a <strong>★ 3,43</strong> (gen 3,5 · feb 3,4 · mar 3,3), tre mesi consecutivi in discesa e il minimo dell'intera serie. Non è oscillazione stagionale: è una traiettoria.</div>
+      </div>
+      <div class="insight-card orange-accent">
+        <div class="insight-tag orange">Contesto</div>
+        <div class="insight-title">7 mesi su 12 sotto la soglia dei 4 punti</div>
+        <div class="insight-body">Nei 12 mesi osservati solo 5 mesi restano a 4,0 o oltre. Il volume di recensioni resta stabile (336 contro 302 dell'anno precedente, +11%), quindi il peggioramento del voto non è spiegabile con un calo di partecipazione: è cambiata la percezione, non la numerosità di chi scrive.</div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:16px;margin-bottom:0;">
+      <div class="note-text">Tutti i valori di questa sezione sono calcolati sulle <strong>988 recensioni datate</strong> (base della serie mensile), non sull'intera base di 2.284. Le medie di periodo sono <strong>ponderate per il numero di recensioni di ciascun mese</strong>. I confronti usano finestre omogenee di 12 e 6 mesi.</div>
     </div>
   </div>
 
@@ -371,37 +551,43 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
   <div class="section">
     <span class="section-anchor" id="frizioni"></span>
     <div class="section-label">FRIZIONI & SERVIZI — ANALISI QUALITATIVA</div>
-    <div style="margin-bottom:8px;font-size:13px;color:var(--mid);line-height:1.6;">
-      Analisi condotta su <strong style="color:var(--dark)">2.284</strong> recensioni con testo. Ogni area è classificata per frequenza, rating medio e percentuale di valutazioni negative, con esempi estratti direttamente dalle recensioni.
-    </div>
-    <div style="height:16px;"></div>
-    <div class="tabs">
-      <button class="tab active" onclick="showFrizioniTab('topics')">Aree Tematiche</button>
-      <button class="tab" onclick="showFrizioniTab('matrix')">Matrice Priorità</button>
+    <div style="margin-bottom:18px;font-size:13px;color:var(--mid);line-height:1.6;">
+      Analisi condotta su <strong style="color:var(--dark)" id="criticalBase">2.284</strong> recensioni con testo. Ogni area è classificata per frequenza, rating medio e percentuale di valutazioni negative, con esempi estratti direttamente dalle recensioni. Usa il filtro per isolare le criticità di un singolo store.
     </div>
 
-    <!-- Sub-tab: Topics -->
-    <div class="tab-panel active" id="ftab-topics">
-      <div style="font-size:11px;color:var(--mid);margin-bottom:14px;">Clicca su un'area per vedere descrizione ed esempi di recensioni.</div>
-      <div class="topic-grid" id="topicGrid"></div>
-      <div id="detailPanel" style="display:none;"></div>
-    </div>
+    <!-- Filtro store -->
+    <div class="store-filter" id="storeFilter"></div>
+    <div id="storeNotice"></div>
 
-    <!-- Sub-tab: Matrix -->
-    <div class="tab-panel" id="ftab-matrix">
-      <div class="matrix-wrap">
-        <table class="matrix-table">
-          <thead>
-            <tr>
-              <th>Frizione Specifica</th>
-              <th>Menzioni</th>
-              <th>Rating Medio</th>
-              <th>% Negativi</th>
-              <th>Priorità</th>
-            </tr>
-          </thead>
-          <tbody id="matrixBody"></tbody>
-        </table>
+    <div id="criticalData">
+      <div class="tabs">
+        <button class="tab active" onclick="showFrizioniTab('topics')">Aree Tematiche</button>
+        <button class="tab" onclick="showFrizioniTab('matrix')">Matrice Priorità</button>
+      </div>
+
+      <!-- Sub-tab: Topics -->
+      <div class="tab-panel active" id="ftab-topics">
+        <div style="font-size:11px;color:var(--mid);margin-bottom:14px;">Clicca su un'area per vedere descrizione ed esempi di recensioni.</div>
+        <div class="topic-grid" id="topicGrid"></div>
+        <div id="detailPanel" style="display:none;"></div>
+      </div>
+
+      <!-- Sub-tab: Matrix -->
+      <div class="tab-panel" id="ftab-matrix">
+        <div class="matrix-wrap">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Frizione Specifica</th>
+                <th>Menzioni</th>
+                <th>Rating Medio</th>
+                <th>% Negativi</th>
+                <th>Priorità</th>
+              </tr>
+            </thead>
+            <tbody id="matrixBody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -416,12 +602,60 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-brand">Elaborato da <strong>MOCA Interactive</strong> · mocainteractive.com</div>
-    <div class="footer-date">24 Marzo 2026</div>
+    <div class="footer-date">Periodo maggio 2023 — marzo 2026 · dati estratti il 24 marzo 2026</div>
   </div>
 
 </div><!-- /page -->
 
 <script>
+/* ══════════════════════════════════════════════════════════════════
+   CONFIGURAZIONE — DATI ESTERNI DA COMPLETARE
+   ──────────────────────────────────────────────────────────────────
+   1) STORE_TOTALS — valutazione "totale" pubblicata sulla scheda dello
+      store, quella che comprende anche le valutazioni con sole stelline.
+      NON è ricavabile dal set di recensioni analizzato: va letta dalla
+      scheda dello store (o da uno scraper) e inserita qui.
+         rating → voto medio mostrato dallo store   (es. 4.1)
+         count  → numero totale di valutazioni      (es. 18500)
+      Finché i valori sono null il report mostra "—" con un avviso
+      esplicito, senza inventare numeri.
+
+   2) STORE_SPLIT — scomposizione per store di aree tematiche e frizioni,
+      necessaria al filtro Apple / Android della sezione criticità.
+      Struttura attesa (le chiavi devono corrispondere esattamente al
+      campo `name` di `topics` e `frictions`):
+         STORE_SPLIT = {
+           topics: {
+             'Pagamento Polizza': {
+               android: {count:300, avg:2.80, neg:50.1},
+               apple:   {count:107, avg:2.30, neg:60.4}
+             }, ...
+           },
+           frictions: {
+             'App si blocca al login': {
+               android: {count:70, avg:1.70, neg:80.0},
+               apple:   {count:27, avg:1.40, neg:88.9}
+             }, ...
+           }
+         }
+      Finché è null, selezionando un singolo store il report mostra un
+      pannello esplicativo invece di numeri aggregati, che verrebbero
+      letti erroneamente come dati di quello store.
+══════════════════════════════════════════════════════════════════ */
+const STORE_TOTALS = {
+  android: { rating: null, count: null },   // Google Play Store
+  apple:   { rating: null, count: null }    // Apple App Store
+};
+
+const STORE_SPLIT = null;
+
+/* Anagrafica store — dati delle sole recensioni CON TESTO (fonte: questo report) */
+const storeMeta = {
+  all:     { label:'Tutti gli store',   short:'Tutti gli store', written:2284, avgWritten:3.16 },
+  android: { label:'Google Play Store', short:'Android',         written:1757, avgWritten:3.44 },
+  apple:   { label:'Apple App Store',   short:'Apple',           written:527,  avgWritten:2.22 }
+};
+
 /* ──────────────────────────────────────────
    DATI
 ────────────────────────────────────────── */
@@ -514,6 +748,9 @@ const insights = [
 /* ──────────────────────────────────────────
    HELPERS
 ────────────────────────────────────────── */
+const nf = n => Number(n).toLocaleString('it-IT');
+const rf = (v,d=2) => Number(v).toFixed(d).replace('.',',');
+
 function priorityStyle(p){
   if(p==='critical') return {cls:'badge-critical',label:'Critica',color:'#E52217'};
   if(p==='high')     return {cls:'badge-high',label:'Alta',color:'#DB5E29'};
@@ -530,6 +767,104 @@ function starsHtml(r,negColor){
   const c = r<=2 ? '#E52217' : r===3 ? '#F5A623' : '#118541';
   return `<span style="color:${c};font-size:11px;letter-spacing:1px">${'★'.repeat(r)}${'☆'.repeat(5-r)}</span>`;
 }
+
+/* ──────────────────────────────────────────
+   VALUTAZIONE TOTALE VS RECENSIONI CON TESTO
+────────────────────────────────────────── */
+const TODO_BADGE = '<span class="badge-todo">dato da inserire</span>';
+
+function hasTotals(k){
+  const t = STORE_TOTALS[k];
+  return !!(t && t.rating != null && t.count != null);
+}
+/* Totale complessivo = media dei due store ponderata sul numero di valutazioni */
+function totalsOverall(){
+  if(!hasTotals('android') || !hasTotals('apple')) return null;
+  const a = STORE_TOTALS.android, b = STORE_TOTALS.apple;
+  const count = a.count + b.count;
+  return { rating:(a.rating*a.count + b.rating*b.count)/count, count };
+}
+
+function renderRatingComparison(){
+  const overall = totalsOverall();
+
+  /* KPI in panoramica */
+  const kpiVal = document.getElementById('kpiTotalRating');
+  const kpiSub = document.getElementById('kpiTotalSub');
+  if(overall){
+    kpiVal.textContent = rf(overall.rating) + ' ★';
+    kpiSub.innerHTML = 'Su <strong>'+nf(overall.count)+'</strong> valutazioni totali, incluse le sole stelline';
+  }else{
+    kpiVal.innerHTML = '<span class="pending">—</span>';
+    kpiSub.innerHTML = 'Incluse le valutazioni con sole stelline ' + TODO_BADGE;
+  }
+
+  /* Card di confronto */
+  const cTotVal  = document.getElementById('cmpTotalVal');
+  const cTotBase = document.getElementById('cmpTotalBase');
+  const cGapVal  = document.getElementById('cmpGapVal');
+  const cGapBase = document.getElementById('cmpGapBase');
+
+  if(overall){
+    const gap = overall.rating - storeMeta.all.avgWritten;
+    const silent = overall.count - storeMeta.all.written;
+    cTotVal.textContent = rf(overall.rating) + ' ★';
+    cTotVal.style.color = 'var(--green)';
+    cTotBase.innerHTML = 'Su <strong>'+nf(overall.count)+'</strong> valutazioni totali, di cui <strong>'+
+      nf(silent)+'</strong> con sole stelline ('+rf(silent/overall.count*100,1)+'%)';
+    cGapVal.textContent = (gap>=0?'+':'−') + rf(Math.abs(gap)) + ' ★';
+    cGapVal.style.color = gap>=0 ? 'var(--orange)' : 'var(--green)';
+    cGapBase.innerHTML = 'Il voto pubblico è più alto di <strong>'+rf(Math.abs(gap))+
+      '</strong> punti rispetto alle recensioni scritte';
+  }else{
+    cTotVal.innerHTML = '<span class="pending">—</span>';
+    cTotBase.innerHTML = 'Comprende le valutazioni con sole stelline ' + TODO_BADGE;
+    cGapVal.innerHTML = '<span class="pending">—</span>';
+    cGapBase.innerHTML = 'Si calcola automaticamente appena la valutazione totale è disponibile';
+  }
+
+  /* Avviso dati mancanti */
+  const todo = document.getElementById('totalsTodo');
+  if(overall){
+    todo.innerHTML = '';
+  }else{
+    const missing = ['android','apple'].filter(k=>!hasTotals(k)).map(k=>storeMeta[k].label).join(' e ');
+    todo.innerHTML = `<div class="note todo"><div class="note-text">
+      <strong>Dato da completare.</strong> La valutazione totale di ${missing} non è ricavabile dal set di
+      recensioni analizzato: è il voto medio pubblicato sulla scheda dello store e comprende anche le
+      valutazioni con sole stelline. Va inserita nella costante <strong>STORE_TOTALS</strong> in testa allo
+      script indicando, per ciascuno store, <strong>rating</strong> (voto medio mostrato) e
+      <strong>count</strong> (numero totale di valutazioni). Il voto complessivo, lo scostamento e la
+      tabella qui sopra si calcolano automaticamente.
+    </div></div>`;
+  }
+
+  /* Tabella per store */
+  const rows = [
+    { key:'android', label:'Google Play Store' },
+    { key:'apple',   label:'Apple App Store'   },
+    { key:'all',     label:'Complessivo'       }
+  ];
+  document.getElementById('cmpTableBody').innerHTML = rows.map(r=>{
+    const s = storeMeta[r.key];
+    const t = r.key==='all' ? overall
+                            : (hasTotals(r.key) ? { rating:STORE_TOTALS[r.key].rating, count:STORE_TOTALS[r.key].count } : null);
+    const isTot = r.key==='all';
+    const gap = t ? t.rating - s.avgWritten : null;
+    const dash = '<span class="pending">—</span>';
+    return `<tr>
+      <td style="font-size:13px;font-weight:${isTot?'700':'600'};color:var(--dark)">${r.label}</td>
+      <td style="font-size:13px;font-weight:600;color:${t?'var(--green)':'inherit'}">${t? '★ '+rf(t.rating) : dash}</td>
+      <td style="font-size:13px;color:var(--mid)">${t? nf(t.count) : dash}</td>
+      <td style="font-size:13px;font-weight:600;color:var(--blue)">★ ${rf(s.avgWritten)}</td>
+      <td style="font-size:13px;color:var(--mid)">${nf(s.written)}</td>
+      <td style="font-size:13px;font-weight:700;color:${gap==null?'inherit':(gap>=0?'var(--orange)':'var(--green)')}">${
+        gap==null ? dash : (gap>=0?'+':'−')+rf(Math.abs(gap))
+      }</td>
+    </tr>`;
+  }).join('');
+}
+renderRatingComparison();
 
 /* ──────────────────────────────────────────
    CHART TREND
@@ -576,6 +911,72 @@ new Chart(document.getElementById('trendChart'),{
 });
 
 /* ──────────────────────────────────────────
+   CHART FOCUS ULTIMO ANNO (12 mesi)
+────────────────────────────────────────── */
+const lastYear = trendData.slice(-12);
+const lastYearLabels = lastYear.map(d=>{
+  const [y,m] = d.date.split('-');
+  return months[parseInt(m)-1]+' '+y.slice(2);
+});
+
+new Chart(document.getElementById('lastYearChart'),{
+  data:{
+    labels:lastYearLabels,
+    datasets:[
+      {
+        type:'bar',
+        label:'Recensioni nel mese',
+        data:lastYear.map(d=>d.count),
+        yAxisID:'y1',
+        backgroundColor:'rgba(87,129,255,0.20)',
+        borderColor:'rgba(87,129,255,0.55)',
+        borderWidth:1,
+        borderRadius:3,
+        order:2
+      },
+      {
+        type:'line',
+        label:'Rating medio',
+        data:lastYear.map(d=>d.avg),
+        yAxisID:'y',
+        borderColor:'#E52217',
+        backgroundColor:'rgba(229,34,23,0.06)',
+        borderWidth:2.5,
+        pointRadius:4,
+        pointBackgroundColor:'#E52217',
+        pointBorderColor:'#fff',
+        pointBorderWidth:1.5,
+        tension:0.3,
+        fill:false,
+        order:1
+      }
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{
+        display:true,position:'top',align:'end',
+        labels:{boxWidth:10,boxHeight:10,usePointStyle:true,pointStyle:'circle',font:{family:'Figtree',size:11},color:'#595959',padding:14}
+      },
+      tooltip:{
+        backgroundColor:'#191919',titleColor:'#fff',bodyColor:'#ccc',
+        padding:10,cornerRadius:6,
+        callbacks:{label:ctx=> ctx.dataset.yAxisID==='y'
+          ? ' Rating medio: '+rf(ctx.parsed.y,1)
+          : ' Recensioni: '+ctx.parsed.y}
+      }
+    },
+    scales:{
+      x:{grid:{display:false},ticks:{font:{family:'Figtree',size:10},color:'#999',maxRotation:45}},
+      y:{position:'left',min:1,max:5,grid:{color:'#f0f0f0'},title:{display:true,text:'Rating medio',font:{family:'Figtree',size:10},color:'#999'},ticks:{font:{family:'Figtree',size:10},color:'#999',stepSize:1}},
+      y1:{position:'right',min:0,grid:{display:false},title:{display:true,text:'N° recensioni',font:{family:'Figtree',size:10},color:'#999'},ticks:{font:{family:'Figtree',size:10},color:'#999',precision:0}}
+    }
+  }
+});
+
+/* ──────────────────────────────────────────
    STRENGTHS / WEAKNESSES
 ────────────────────────────────────────── */
 function renderSwList(items, containerId, isPos){
@@ -594,58 +995,126 @@ function renderSwList(items, containerId, isPos){
 renderSwList(strengths,'strengthsList',true);
 renderSwList(weaknesses,'weaknessesList',false);
 
-/* ──────────────────────────────────────────
-   TOPIC GRID
-────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════
+   CRITICITÀ — RENDERING CON FILTRO PER STORE
+══════════════════════════════════════════════════════════════════ */
+let currentStore = 'all';
 let selectedCard = null;
-const grid = document.getElementById('topicGrid');
-topics.forEach((t,i)=>{
-  const p = priorityStyle(t.priority);
-  const pct = Math.min(t.count/407*100,100);
-  const card = document.createElement('div');
-  card.className = 'topic-card';
-  card.innerHTML = `
-    <div class="tc-header">
-      <div class="tc-name">${t.name}</div>
-      <div class="tc-badge ${p.cls}">${p.label}</div>
-    </div>
-    <div class="tc-stats">
-      <div class="tc-stat"><strong>${t.count}</strong> menzioni</div>
-      <div class="tc-stat">★ <strong>${t.avg.toFixed(2)}</strong></div>
-      <div class="tc-stat" style="color:${barColor(t.neg)}"><strong>${t.neg}%</strong> neg.</div>
-    </div>
-    <div class="tc-bar-wrap"><div class="tc-bar" style="width:${pct}%;background:${barColor(t.neg)}"></div></div>
-  `;
-  card.onclick=()=>selectTopic(i,card);
-  grid.appendChild(card);
-});
 
-function selectTopic(i,card){
+/* Metriche di un elemento per lo store selezionato.
+   Ritorna null quando lo split per quello store non è disponibile. */
+function metricsFor(item, kind, store){
+  if(store === 'all') return {count:item.count, avg:item.avg, neg:item.neg};
+  const entry = STORE_SPLIT && STORE_SPLIT[kind] && STORE_SPLIT[kind][item.name];
+  const m = entry && entry[store];
+  return m ? {count:m.count, avg:m.avg, neg:m.neg} : null;
+}
+function splitAvailable(store){
+  if(store === 'all') return true;
+  return topics.some(t=>metricsFor(t,'topics',store)) ||
+         frictions.some(f=>metricsFor(f,'frictions',store));
+}
+
+function renderStoreFilter(){
+  document.getElementById('storeFilter').innerHTML =
+    ['all','android','apple'].map(k=>`
+      <button class="sf-btn ${k===currentStore?'active':''}" onclick="setStore('${k}')">
+        ${storeMeta[k].short}<span class="sf-n">${nf(storeMeta[k].written)}</span>
+      </button>`).join('');
+}
+
+function storeNoticeHtml(k){
+  const s = storeMeta[k];
+  return `<div class="empty-panel">
+    <div class="empty-title">Scomposizione per store non disponibile — ${s.label}</div>
+    <div class="empty-body">
+      Il filtro è attivo, ma la classificazione delle criticità di questo report è calcolata
+      sull'insieme dei due store: non contiene l'attribuzione di ogni singola menzione ad Apple
+      o ad Android. Mostrare qui i numeri aggregati li farebbe leggere come dati di
+      <strong>${s.short}</strong>, quindi la vista resta volutamente vuota.
+      <br><br>
+      Per popolarla serve, per ogni area tematica e per ogni frizione, la terna
+      <strong>menzioni · rating medio · % negativi</strong> calcolata sul solo store — oppure il
+      dataset grezzo delle recensioni con il campo store, da cui quei valori si ricavano
+      direttamente. I dati vanno inseriti nella costante <strong>STORE_SPLIT</strong> in testa
+      allo script: questa vista si popola da sola.
+    </div>
+    <div class="empty-kpis">
+      <div>
+        <div class="detail-kpi-val" style="color:var(--dark)">${nf(s.written)}</div>
+        <div class="detail-kpi-lbl">Recensioni con testo</div>
+      </div>
+      <div>
+        <div class="detail-kpi-val" style="color:var(--blue)">★ ${rf(s.avgWritten)}</div>
+        <div class="detail-kpi-lbl">Rating medio con testo</div>
+      </div>
+      <div>
+        <div class="detail-kpi-val" style="color:var(--dark)">${rf(s.written/storeMeta.all.written*100,1)}%</div>
+        <div class="detail-kpi-lbl">Quota delle recensioni</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ── Aree tematiche ── */
+function renderTopics(store){
+  const rows = topics.map(t=>({t, m:metricsFor(t,'topics',store)}))
+                     .filter(r=>r.m)
+                     .sort((a,b)=>b.m.count-a.m.count);
+  const max = rows.length ? rows[0].m.count : 1;
+  const grid = document.getElementById('topicGrid');
+  grid.innerHTML = '';
+  rows.forEach(({t,m})=>{
+    const p = priorityStyle(t.priority);
+    const card = document.createElement('div');
+    card.className = 'topic-card';
+    card.innerHTML = `
+      <div class="tc-header">
+        <div class="tc-name">${t.name}</div>
+        <div class="tc-badge ${p.cls}">${p.label}</div>
+      </div>
+      <div class="tc-stats">
+        <div class="tc-stat"><strong>${nf(m.count)}</strong> menzioni</div>
+        <div class="tc-stat">★ <strong>${rf(m.avg)}</strong></div>
+        <div class="tc-stat" style="color:${barColor(m.neg)}"><strong>${rf(m.neg,1)}%</strong> neg.</div>
+      </div>
+      <div class="tc-bar-wrap"><div class="tc-bar" style="width:${Math.min(m.count/max*100,100)}%;background:${barColor(m.neg)}"></div></div>
+    `;
+    card.onclick = ()=>selectTopic(t,m,card,store);
+    grid.appendChild(card);
+  });
+  selectedCard = null;
+  document.getElementById('detailPanel').style.display = 'none';
+}
+
+function selectTopic(t,m,card,store){
   if(selectedCard) selectedCard.classList.remove('selected');
   card.classList.add('selected');
   selectedCard = card;
-  const t = topics[i];
   const panel = document.getElementById('detailPanel');
-  panel.style.display='block';
-  panel.innerHTML=`
+  panel.style.display = 'block';
+  const scopeNote = store === 'all' ? '' :
+    `<div style="font-size:11px;color:var(--mid);margin-bottom:12px;">Metriche riferite a <strong>${storeMeta[store].label}</strong>. Le citazioni sono estratte dall'insieme delle recensioni dei due store.</div>`;
+  panel.innerHTML = `
     <div class="detail-panel">
       <div class="detail-header">
         <div class="detail-title">${t.name}</div>
         <div class="detail-kpis">
           <div>
-            <div class="detail-kpi-val" style="color:var(--dark)">${t.count}</div>
+            <div class="detail-kpi-val" style="color:var(--dark)">${nf(m.count)}</div>
             <div class="detail-kpi-lbl">Menzioni</div>
           </div>
           <div>
-            <div class="detail-kpi-val" style="color:var(--blue)">★ ${t.avg.toFixed(2)}</div>
+            <div class="detail-kpi-val" style="color:var(--blue)">★ ${rf(m.avg)}</div>
             <div class="detail-kpi-lbl">Rating medio</div>
           </div>
           <div>
-            <div class="detail-kpi-val" style="color:${barColor(t.neg)}">${t.neg}%</div>
+            <div class="detail-kpi-val" style="color:${barColor(m.neg)}">${rf(m.neg,1)}%</div>
             <div class="detail-kpi-lbl">% Negativi</div>
           </div>
         </div>
       </div>
+      ${scopeNote}
       <p style="font-size:13px;color:var(--mid);line-height:1.65;margin-bottom:18px;">${t.desc}</p>
       <div class="q-label">Citazioni rappresentative</div>
       ${t.quotes.map(q=>`
@@ -659,31 +1128,46 @@ function selectTopic(i,card){
   setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
 
-/* ──────────────────────────────────────────
-   MATRIX
-────────────────────────────────────────── */
-const tbody = document.getElementById('matrixBody');
-const sorted = [...frictions].sort((a,b)=>{
-  const ord={critical:0,high:1,medium:2,low:3};
-  return ord[a.priority]-ord[b.priority]||b.neg-a.neg;
-});
-sorted.forEach(f=>{
-  const p = priorityStyle(f.priority);
-  const tr = document.createElement('tr');
-  tr.innerHTML=`
-    <td style="font-size:13px;font-weight:600;color:var(--dark)">${f.name}</td>
-    <td style="font-size:13px;color:var(--mid)">${f.count}</td>
-    <td style="font-size:13px;color:${barColor(f.neg)};font-weight:600;">★ ${f.avg.toFixed(2)}</td>
-    <td>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <div class="neg-bar-wrap"><div class="neg-bar" style="width:${f.neg}%;background:${barColor(f.neg)}"></div></div>
-        <span style="font-size:12px;color:${barColor(f.neg)};font-weight:600;">${f.neg}%</span>
-      </div>
-    </td>
-    <td><span class="impact-pill ${p.cls}"><span class="pri-dot" style="background:${p.color}"></span>${p.label}</span></td>
-  `;
-  tbody.appendChild(tr);
-});
+/* ── Matrice priorità ── */
+function renderMatrix(store){
+  const ord = {critical:0,high:1,medium:2,low:3};
+  const rows = frictions.map(f=>({f, m:metricsFor(f,'frictions',store)}))
+                        .filter(r=>r.m)
+                        .sort((a,b)=> ord[a.f.priority]-ord[b.f.priority] || b.m.neg-a.m.neg);
+  document.getElementById('matrixBody').innerHTML = rows.map(({f,m})=>{
+    const p = priorityStyle(f.priority);
+    return `<tr>
+      <td style="font-size:13px;font-weight:600;color:var(--dark)">${f.name}</td>
+      <td style="font-size:13px;color:var(--mid)">${nf(m.count)}</td>
+      <td style="font-size:13px;color:${barColor(m.neg)};font-weight:600;">★ ${rf(m.avg)}</td>
+      <td>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="neg-bar-wrap"><div class="neg-bar" style="width:${m.neg}%;background:${barColor(m.neg)}"></div></div>
+          <span style="font-size:12px;color:${barColor(m.neg)};font-weight:600;">${rf(m.neg,1)}%</span>
+        </div>
+      </td>
+      <td><span class="impact-pill ${p.cls}"><span class="pri-dot" style="background:${p.color}"></span>${p.label}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderCritical(){
+  const ok = splitAvailable(currentStore);
+  document.getElementById('criticalData').style.display = ok ? 'block' : 'none';
+  document.getElementById('storeNotice').innerHTML = ok ? '' : storeNoticeHtml(currentStore);
+  const base = document.getElementById('criticalBase');
+  if(base) base.textContent = nf(storeMeta[currentStore].written);
+  if(ok){ renderTopics(currentStore); renderMatrix(currentStore); }
+}
+
+function setStore(k){
+  currentStore = k;
+  renderStoreFilter();
+  renderCritical();
+}
+
+renderStoreFilter();
+renderCritical();
 
 /* ──────────────────────────────────────────
    INSIGHTS
@@ -714,7 +1198,7 @@ function showFrizioniTab(name){
 /* ──────────────────────────────────────────
    NAV HIGHLIGHT ON SCROLL
 ────────────────────────────────────────── */
-const sections = ['panoramica','distribuzione','trend','forze-debolezze','frizioni','raccomandazioni'];
+const sections = ['panoramica','valutazione-totale','distribuzione','trend','ultimo-anno','forze-debolezze','frizioni','raccomandazioni'];
 window.addEventListener('scroll',()=>{
   let current='';
   sections.forEach(id=>{
