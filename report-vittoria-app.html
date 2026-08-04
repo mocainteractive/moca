@@ -321,13 +321,83 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
       <a href="https://apps.apple.com/it/app/myvittoria/id444690713" target="_blank" rel="noopener">MyVittoria <span>· App Store IT · id 444690713</span></a>
       <a href="https://play.google.com/store/apps/details?id=it.vittoria.assicurazioni&amp;hl=it" target="_blank" rel="noopener">Vittoria Assicurazioni <span>· Play Store IT · it.vittoria.assicurazioni</span></a>
     </div>
+
+    <div class="card" style="margin-top:22px;">
+      <div class="card-title">Copertura del dato — perché 2.007 e non 22.642</div>
+      <div style="font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:14px;">
+        La scheda App Store mostra <strong>9,6K valutazioni</strong> e quella Google Play <strong>13.086</strong>: sono
+        <strong>valutazioni</strong>, cioè stelline assegnate con un tap. Solo una piccola minoranza di chi valuta scrive
+        anche un testo, e <strong>solo il testo è analizzabile</strong>: senza parole non c'è motivazione da classificare.
+        Su Google Play il rapporto è misurabile — la scheda dichiara <strong>1.782 recensioni con testo</strong> su
+        13.086 valutazioni, cioè il <strong>13,6%</strong>. Apple non pubblica il dato equivalente.
+      </div>
+      <div class="matrix-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Store</th>
+              <th>Valutazioni totali</th>
+              <th>Con testo (dichiarate)</th>
+              <th>Estratte</th>
+              <th>Copertura</th>
+              <th>Nella base</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-size:13px;font-weight:600;color:var(--dark)">Google Play Store</td>
+              <td style="font-size:13px;color:var(--mid)">13.086</td>
+              <td style="font-size:13px;color:var(--dark)">1.782</td>
+              <td style="font-size:13px;color:var(--dark)">1.745</td>
+              <td style="font-size:13px;font-weight:700;color:var(--green)">97,9%</td>
+              <td style="font-size:13px;color:var(--mid)">1.652</td>
+            </tr>
+            <tr>
+              <td style="font-size:13px;font-weight:600;color:var(--dark)">Apple App Store</td>
+              <td style="font-size:13px;color:var(--mid)">9.556</td>
+              <td style="font-size:13px;color:var(--mid)">non dichiarate</td>
+              <td style="font-size:13px;color:var(--dark)">380</td>
+              <td style="font-size:13px;font-weight:700;color:var(--orange)">tetto della fonte</td>
+              <td style="font-size:13px;color:var(--mid)">355</td>
+            </tr>
+            <tr>
+              <td style="font-size:13px;font-weight:700;color:var(--dark)">Complessivo</td>
+              <td style="font-size:13px;font-weight:600;color:var(--mid)">22.642</td>
+              <td style="font-size:13px;color:var(--mid)">—</td>
+              <td style="font-size:13px;font-weight:600;color:var(--dark)">2.125</td>
+              <td style="font-size:13px;color:var(--mid)">—</td>
+              <td style="font-size:13px;font-weight:700;color:var(--dark)">2.007</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note todo" style="margin-top:16px;margin-bottom:0;">
+        <div class="note-text">
+          <strong>Il limite è della fonte, non dell'analisi.</strong> Su <strong>Google Play</strong> la copertura è
+          quasi totale: 1.745 recensioni estratte sulle 1.782 con testo dichiarate dalla scheda. Su <strong>App
+          Store</strong> il feed pubblico si ferma a <strong>380 recensioni per storefront</strong>: è un tetto imposto
+          da Apple, verificato interrogando la fonte con cinque estrattori diversi e con tutti e quattro gli
+          ordinamenti disponibili (più recenti, più utili, più favorevoli, più critiche). Tutti restituiscono le stesse
+          380. Apple inoltre <strong>pota il feed nel tempo</strong>: le recensioni più vecchie escono dalla
+          disponibilità pubblica anche se la valutazione resta conteggiata nel totale di 9,6K. Le
+          <strong>2.007 recensioni</strong> della base non sono quindi un campione scelto, ma
+          <strong>tutto ciò che le fonti pubbliche espongono</strong> alla data di estrazione.
+          <br><br>
+          Il conteggio delle valutazioni resta comunque pienamente utilizzato dal report: alimenta la
+          <strong>valutazione totale di store</strong> e lo <strong>scostamento</strong> della sezione seguente, che
+          misurano proprio il peso delle 20.635 valutazioni silenziose. Per ottenere il 100% delle recensioni con
+          testo, incluse quelle non più esposte da Apple, serve un export dai pannelli proprietari
+          <strong>App Store Connect</strong> e <strong>Google Play Console</strong>, accessibili al titolare dell'app.
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ── SECTION 1: KPI ── -->
   <div class="section">
     <span class="section-anchor" id="panoramica"></span>
     <div class="note">
-      <div class="note-text">Esistono <strong>due letture diverse</strong> della stessa app e vanno tenute distinte. La <strong>valutazione totale</strong> è il voto che compare sulla scheda dello store: comprende anche le migliaia di valutazioni silenziose (solo stelline, senza testo) ed è tipicamente più alta. La <strong>valutazione delle recensioni con testo</strong> si basa sulle 2.007 recensioni scritte pubblicate fino al 24 marzo 2026: è il dato più severo, ma è l'unico che consente di capire <em>perché</em> gli utenti valutano così. Il confronto tra le due è nella sezione seguente.</div>
+      <div class="note-text">Esistono <strong>due letture diverse</strong> della stessa app e vanno tenute distinte. La <strong>valutazione totale</strong> è il voto che compare sulla scheda dello store: comprende anche le migliaia di valutazioni silenziose (solo stelline, senza testo) ed è tipicamente più alta. La <strong>valutazione delle recensioni con testo</strong> si basa sulle 2.007 recensioni scritte pubblicate fino al 24 marzo 2026: è il dato più severo, ma è l'unico che consente di capire <em>perché</em> gli utenti valutano così. Il confronto tra le due è nella sezione seguente, mentre il riquadro <strong>Copertura del dato</strong> qui sopra spiega perché le recensioni con testo sono molte meno delle valutazioni.</div>
     </div>
     <div class="section-label">KPI OVERVIEW</div>
     <div class="kpi-grid">
