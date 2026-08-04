@@ -191,6 +191,13 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
 .period-val{font-size:15px;font-weight:700;color:var(--dark);line-height:1.35;}
 .period-note{font-size:11px;color:var(--mid);margin-top:5px;line-height:1.5;}
 
+/* ── FONTI (schede store) ── */
+.sources{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:0 2px;}
+.sources-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mid);}
+.sources a{font-size:11px;font-weight:600;color:var(--dark);text-decoration:none;background:var(--white);border:1px solid #e6e6e6;border-radius:6px;padding:5px 10px;transition:border-color .15s,box-shadow .15s;}
+.sources a:hover{border-color:#c8c8c8;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.sources a span{font-weight:400;color:var(--mid);}
+
 /* ── CONFRONTO VALUTAZIONI ── */
 .cmp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;}
 .cmp-card{background:var(--white);border-radius:10px;border:1px solid #eaeaea;border-top-width:3px;padding:22px;}
@@ -308,6 +315,11 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
         <div class="period-val">988</div>
         <div class="period-note">Base delle serie mensili (trend e focus ultimo anno)</div>
       </div>
+    </div>
+    <div class="sources">
+      <span class="sources-lbl">App analizzate</span>
+      <a href="https://apps.apple.com/it/app/myvittoria/id444690713" target="_blank" rel="noopener">MyVittoria <span>· App Store IT · id 444690713</span></a>
+      <a href="https://play.google.com/store/apps/details?id=it.vittoria.assicurazioni&amp;hl=it" target="_blank" rel="noopener">Vittoria Assicurazioni <span>· Play Store IT · it.vittoria.assicurazioni</span></a>
     </div>
   </div>
 
@@ -617,6 +629,9 @@ body{font-family:var(--font);background:var(--light);color:var(--dark);min-heigh
       scheda dello store (o da uno scraper) e inserita qui.
          rating → voto medio mostrato dallo store   (es. 4.1)
          count  → numero totale di valutazioni      (es. 18500)
+      Schede di riferimento:
+         Android → https://play.google.com/store/apps/details?id=it.vittoria.assicurazioni&hl=it
+         Apple   → https://apps.apple.com/it/app/myvittoria/id444690713
       Finché i valori sono null il report mostra "—" con un avviso
       esplicito, senza inventare numeri.
 
